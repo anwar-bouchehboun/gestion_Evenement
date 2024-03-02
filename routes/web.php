@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategorieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.index');
-});
-Route::get('/category', function () {
-    return view('admin.category');
-});
-Route::get('/edit', function () {
-    return view('admin.editcategory');
-});
-// Route::resource('/category',[]);
+// Route::get('/', function () {
+//     return view('admin.index');
+// });
+// Route::get('/category', function () {
+//     return view('admin.category');
+// });
+// Route::get('/edit', function () {
+//     return view('admin.editcategory');
+// });
+Route::get('/Admin', [AdminController::class,'index'])->name('dashbord.admin');
+Route::resource('/categorie', CategorieController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
