@@ -15,8 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.index');
 });
+Route::get('/category', function () {
+    return view('admin.category');
+});
+Route::get('/edit', function () {
+    return view('admin.editcategory');
+});
+// Route::resource('/category',[]);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
