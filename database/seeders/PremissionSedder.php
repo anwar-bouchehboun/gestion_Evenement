@@ -13,6 +13,6 @@ class PremissionSedder extends Seeder
      */
     public function run(): void
     {
-        Permission::create(['name' => 'oraingse']);
+        Permission::create(['name' => 'organise']);
     }
 }

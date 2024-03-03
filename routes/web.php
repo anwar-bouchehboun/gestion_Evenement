@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
@@ -16,17 +17,25 @@ use App\Http\Controllers\CategorieController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('admin.index');
-// });
-// Route::get('/category', function () {
-//     return view('admin.category');
-// });
-// Route::get('/edit', function () {
-//     return view('admin.editcategory');
-// });
-Route::get('/Admin', [AdminController::class,'index'])->name('dashbord.admin');
-Route::resource('/categorie', CategorieController::class);
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::middleware(['auth', 'role:client'])->group(function () {
+    Route::get('/client', [ClientController::class, 'index'])->name('client');
+
+
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/Admin', [AdminController::class, 'index'])->name('dashbord.admin');
+    Route::resource('/categorie', CategorieController::class);
+
+
+});
+
+
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -38,4 +47,4 @@ Route::resource('/categorie', CategorieController::class);
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

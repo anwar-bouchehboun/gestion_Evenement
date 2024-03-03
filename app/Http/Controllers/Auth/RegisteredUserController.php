@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -43,9 +43,16 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
+        $user->assignRole('client');
         Auth::login($user);
+        if ($user->HasRole('client')) {
+            return redirect()->intended(RouteServiceProvider::CLIENT);
 
-        return redirect(RouteServiceProvider::HOME);
+        } else {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+
+        // return redirect(RouteServiceProvider::HOME);
     }
 }
