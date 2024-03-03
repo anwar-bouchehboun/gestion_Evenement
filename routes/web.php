@@ -31,6 +31,10 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/Admin', [AdminController::class, 'index'])->name('dashbord.admin');
     Route::resource('/categorie', CategorieController::class);
+    Route::get('/givepermission',[AdminController::class, 'givePermission'])->name('dashbord.permission');
+    Route::put('/permission/accepte/{user}',[AdminController::class, 'updatepermsioon'])->name('dashbord.donpermission');
+    Route::put('/permission/refuser/{user}',[AdminController::class, 'RefuserPission'])->name('dashbord.refuser');
+
 
 
 });

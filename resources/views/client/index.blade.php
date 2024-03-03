@@ -6,7 +6,7 @@
         @include('layouts.navbaradmin')
         <!-- end navbar -->
 
-        
+
         <div class="p-6">
 
             <h2 class="  text-[#f84525] text-3xl font-bold pb-2">DASHBOARD</h2>

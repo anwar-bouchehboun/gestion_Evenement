@@ -1367,13 +1367,13 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                     </a>
                     <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                         <li class="mb-4">
-                            <a href=""
+                            <a href="{{ route('dashbord.permission') }}"
                                 class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Permession</a>
                         </li>
-                        <li class="mb-4">
+                        {{-- <li class="mb-4">
                             <a href=""
                                 class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Roles</a>
-                        </li>
+                        </li> --}}
                         <li class="mb-4">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -1390,8 +1390,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                 </li>
             @endrole
             @role('client')
-
-           
                 <li class="mb-1 group">
                     <a href="{{ route('client') }}"
                         class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
