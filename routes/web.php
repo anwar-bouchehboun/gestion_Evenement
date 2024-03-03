@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('client');
+    Route::get('/permission/{user}',[ClientController::class, 'askpermession'])->name('Accepte');
 
 
 });
