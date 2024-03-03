@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
- 
+
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
