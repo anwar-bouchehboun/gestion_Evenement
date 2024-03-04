@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategorieController;
 
@@ -35,8 +36,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/permission/accepte/{user}',[AdminController::class, 'updatepermsioon'])->name('dashbord.donpermission');
     Route::put('/permission/refuser/{user}',[AdminController::class, 'RefuserPission'])->name('dashbord.refuser');
 
+});
 
-
+Route::middleware(['auth','permission:organise'])->group(function(){
+ Route::resource('/Event', EventController::class);
 });
 
 

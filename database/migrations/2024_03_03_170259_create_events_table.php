@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,8 +18,9 @@ return new class extends Migration
             $table->string('location');
             $table->string('image');
             $table->integer('number_places');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('categories_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
-            $table->enum('status',['manuel','auto']);
+            $table->enum('status', ['manuel', 'auto']);
             $table->boolean('validated')->default(false);
             $table->softDeletes();
             $table->timestamps();

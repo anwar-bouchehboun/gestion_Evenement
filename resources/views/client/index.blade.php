@@ -21,7 +21,6 @@
                             </button>
                         </form>
                     @else
-                    
                         @can('organise')
                             Organisateur
                         @else
@@ -138,7 +137,7 @@
                 </div> --}}
             <div class="p-3 bg-white border border-gray-100 rounded-md shadow-md shadow-black/5">
                 <div class="flex flex-wrap items-center px-6 py-2">
-                    <div class="py-2 text-sm font-bold text-blue-400">Event</div>
+                    <div class="py-2 text-sm font-bold text-blue-400">Event Reserve</div>
                     <div class="block w-full overflow-x-auto">
                         <table class="items-center w-full bg-transparent border-collapse">
                             <thead>
@@ -149,9 +148,16 @@
                                     <th
                                         class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                         Categorie</th>
+                                        <th
+                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                        Location</th>
+
                                     <th
                                         class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                         Date</th>
+                                    <th
+                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                        Ticket</th>
                                     <th
                                         class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                         Action</th>
@@ -165,6 +171,12 @@
                                     <td
                                         class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                         1</td>
+                                        <td
+                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                        1</td>
+                                    <td
+                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                        1</td>
                                     <td
                                         class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                         5</td>
@@ -173,36 +185,7 @@
                                             class="p-4 px-4 text-xs text-black align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Status</button>
                                     </td>
                                 </tr>
-                                <tr class="text-gray-700 dark:text-gray-100">
-                                    <th
-                                        class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        User</th>
-                                    <td
-                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        6</td>
-                                    <td
-                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        5</td>
-                                    <td>
-                                        <button
-                                            class="p-4 px-4 text-xs text-black align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Status</button>
-                                    </td>
-                                </tr>
-                                <tr class="text-gray-700 dark:text-gray-100">
-                                    <th
-                                        class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        Organsateur</th>
-                                    <td
-                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        5</td>
-                                    <td
-                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        5</td>
-                                    <td>
-                                        <button
-                                            class="p-4 px-4 text-xs text-black align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Status</button>
-                                    </td>
-                                </tr>
+
 
                             </tbody>
                         </table>

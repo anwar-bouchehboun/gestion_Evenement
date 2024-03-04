@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -12,7 +14,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $categories=Categorie::all();
+        return view('organisateur.index',compact('categories'));
     }
 
     /**
@@ -28,7 +31,39 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate( [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'date' => 'required|date',
+            'location' => 'required|string|max:255',
+            'image' => 'required',
+            'number_places' => 'required|integer',
+            'categories_id' => 'required|exists:categories,id',
+            'status' => 'required|in:manuel,auto',
+        ]);
+        if($request->hasFile('image')){
+            $validated['image']=$request->file('image')->store('EventsImg','public');
+        } else{
+            $validated['image']=$request->input('image');
+        }
+
+              $user=Auth::id();
+         $event=Event::create(
+            [
+                'title' =>$request->title ,
+                'description' => $request->description,
+                'date' => $request->date,
+                'location' => $request->location,
+                'image' => $validated['image'],
+                'number_places' => $request->number_places,
+                'categories_id' =>$request->categories_id,
+                'status' =>$request->status,
+                'user_id'=>$user,
+
+            ]
+            );
+
+             return redirect()->back();
     }
 
     /**
@@ -44,7 +79,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+
     }
 
     /**
@@ -52,7 +87,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+
     }
 
     /**
@@ -60,6 +95,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect()->route('Event.index')->with('success', 'Event supprimée avec succès.');
+
     }
 }
