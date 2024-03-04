@@ -10,32 +10,7 @@
         <div class="p-6">
 
             <h2 class="  text-[#f84525] text-3xl font-bold pb-2">Creation Evenments</h2>
-            {{-- <div class="p-2 mb-6 text-center rounded bg-[#FEECE2] w-60">
-                <div class="font-bold text-blue-500 uppercase ">
-                    @if (Auth::user()->ascked_permission == false)
-                        <form action="{{ route('Accepte', ['user' => Auth::user()]) }}">
-                            <button
-                                class="inline-flex items-center px-1 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out border border-transparent rounded-md  focus:outline-none text-[#F6995C]">
-                                Rappel
-                                Permission
-                            </button>
-                        </form>
-                    @else
-                        @can('organise')
-                            Organisateur
-                        @else
-                            waiting
-                        @endcan
-                    @endif
 
-
-
-
-
-
-                </div>
-
-            </div> --}}
 
             <div
                 class="relative flex flex-col w-full min-w-0 p-6 mb-4 break-words rounded shadow-lg lg:mb-0 bg-gray-50 dark:bg-gray-800">
@@ -132,15 +107,23 @@
                             </form>
 
                         </div>
-                        @if (session('success'))
-                            <div class="px-4 py-3 text-green-700 bg-green-100 border border-green-400 rounded w-80 "
-                                role="alert">
-                                <strong class="font-bold">Succès!</strong>
-                                <span class="block sm:inline">{{ session('success') }}</span>
 
-                            </div>
-                        @endif
                     </div>
+                    @if (session('success'))
+                        <div class="px-4 py-3 text-green-700 bg-green-100 border border-green-400 rounded w-80 "
+                            role="alert">
+                            <strong class="font-bold">Succès!</strong>
+                            <span class="block sm:inline">{{ session('success') }}</span>
+
+                        </div>
+                    @endif
+                    @if (session('Error'))
+                        <div class="px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded w-80 " role="alert">
+                            <strong class="font-bold">Error date creer date now ou apres date !</strong>
+                            <span class="block sm:inline">{{ session('Error') }}</span>
+
+                        </div>
+                    @endif
 
                 </div>
             </div>

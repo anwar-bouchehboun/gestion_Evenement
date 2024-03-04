@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\Event;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
@@ -15,8 +16,8 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::with('user', 'categorie')->where('user_id', Auth::id())->get();
-     
-        return view('organisateur.index',compact('events'));
+
+        return view('organisateur.index', compact('events'));
     }
 
     /**
@@ -24,8 +25,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        $categories=Categorie::all();
-        return view('organisateur.index',compact('categories'));
+        $categories = Categorie::all();
+        return view('organisateur.create', compact('categories'));
     }
 
     /**
@@ -33,7 +34,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate( [
+        $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
@@ -43,29 +44,39 @@ class EventController extends Controller
             'categories_id' => 'required|exists:categories,id',
             'status' => 'required|in:manuel,auto',
         ]);
-        if($request->hasFile('image')){
-            $validated['image']=$request->file('image')->store('EventsImg','public');
-        } else{
-            $validated['image']=$request->input('image');
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('EventsImg', 'public');
+        } else {
+            $validated['image'] = $request->input('image');
         }
+        $date_requested = new DateTime($request->date);
+        $date_today = new DateTime();
+        if ($date_requested > $date_today) {
+            $new_date = $date_requested;
+        } else {
+            return redirect()->back()->with('Error', 'Event Error avec succès.');
+            ;
 
-              $user=Auth::id();
-         $event=Event::create(
+
+        }
+        $user = Auth::id();
+        $event = Event::create(
             [
-                'title' =>$request->title ,
+                'title' => $request->title,
                 'description' => $request->description,
-                'date' => $request->date,
+                'date' => $new_date,
                 'location' => $request->location,
                 'image' => $validated['image'],
                 'number_places' => $request->number_places,
-                'categories_id' =>$request->categories_id,
-                'status' =>$request->status,
-                'user_id'=>$user,
+                'categories_id' => $request->categories_id,
+                'status' => $request->status,
+                'user_id' => $user,
 
             ]
-            );
+        );
 
-             return redirect()->back()->with('success', 'Event Add avec succès.');;
+        return redirect()->back()->with('success', 'Event Add avec succès.');
+        ;
     }
 
     /**

@@ -1404,11 +1404,11 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                 <i class="mr-3 text-lg ri-home-2-line"></i>
                 <span class="text-sm">Dashboard</span>
             </a>
-                    {{-- <a href="{{ route('Event.create') }}"
+                    <a href="{{ route('Event.create') }}"
                         class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                         <i class='mr-3 text-lg bx bx-list-ul'></i>
                         <span class="text-sm">Event</span>
-                    </a> --}}
+                    </a>
 
                 @endcan
                 <li class="mb-4">
