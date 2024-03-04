@@ -9,15 +9,16 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AdminSedder extends Seeder
 {
-  
+
     public function run(): void
     {
         $user = User::create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
+            'role'=>'admin',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
         ]);
-        $user->assignRole('admin');
+         $user->assignRole('admin');
     }
 }

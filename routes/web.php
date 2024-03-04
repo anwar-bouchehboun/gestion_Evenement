@@ -38,7 +38,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 });
 
-Route::middleware(['auth','permission:organise'])->group(function(){
+Route::middleware(['auth','role:organisateur'])->group(function(){
  Route::resource('/Event', EventController::class);
 });
 

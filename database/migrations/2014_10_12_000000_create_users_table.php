@@ -16,10 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('role');
             $table->boolean('ascked_permission')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('image')->nullable();
             $table->string('password');
+            $table->string('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

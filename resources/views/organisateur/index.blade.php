@@ -39,7 +39,7 @@
 
             <div
                 class="relative flex flex-col w-full min-w-0 p-6 mb-4 break-words rounded shadow-lg lg:mb-0 bg-gray-50 dark:bg-gray-800">
-                <h2 class="font-bold text-orange-600">Creation Evenments</h2>
+                <h2 class="font-bold text-blue-400">Creation Evenments</h2>
                 <div class="px-0 mb-0 border-0 rounded-t">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="block w-full overflow-x-auto">
@@ -109,7 +109,7 @@
 
             <div
                 class="relative flex flex-col w-full min-w-0 p-6 mb-4 break-words rounded shadow-lg lg:mb-0 bg-gray-50 dark:bg-gray-800">
-                <h2 class="font-bold text-orange-600">Statistiques Reservation sur les Evenments</h2>
+                <h2 class="font-bold text-blue-400">Statistiques Reservation sur les Evenments</h2>
                 <div class="px-0 mb-0 border-0 rounded-t">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="block w-full overflow-x-auto">

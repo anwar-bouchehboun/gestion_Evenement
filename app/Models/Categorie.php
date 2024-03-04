@@ -14,7 +14,7 @@ class Categorie extends Model
         'name',
     ];
     public function event(){
-        return $this->belongsTo(Event::class, 'categories_id');
+        return $this->hasMany(Event::class, 'categories_id');
 
       }
 }

@@ -1399,17 +1399,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                 </li>
 
                 @can('organise')
-                <a href="{{ route('Event.index') }}"
-                class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                <i class="mr-3 text-lg ri-home-2-line"></i>
-                <span class="text-sm">Dashboard</span>
-            </a>
+                    <a href="{{ route('Event.index') }}"
+                        class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                        <i class="mr-3 text-lg ri-home-2-line"></i>
+                        <span class="text-sm">Dashboard</span>
+                    </a>
                     <a href="{{ route('Event.create') }}"
                         class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                         <i class='mr-3 text-lg bx bx-list-ul'></i>
                         <span class="text-sm">Event</span>
                     </a>
-
                 @endcan
                 <li class="mb-4">
                     <form method="POST" action="{{ route('logout') }}">
@@ -1424,6 +1423,36 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                     </form>
                 </li>
             @endrole
+            @role('organisateur')
+            <li class="mb-1 group">
+                <a href="{{ route('Event.index') }}"
+                    class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="mr-3 text-lg ri-home-2-line"></i>
+                    <span class="text-sm">Dashboard</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="{{ route('Event.create') }}"
+                    class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class='mr-3 text-lg bx bx-list-ul'></i>
+                    <span class="text-sm">Event</span>
+                </a>
+            </li>
+
+        
+            <li class="mb-4">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault();
+
+                                this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
+            </li>
+        @endrole
 
     </div>
     <div class="fixed top-0 left-0 z-40 w-full h-full bg-black/50 md:hidden sidebar-overlay"></div>
