@@ -29,7 +29,7 @@
                                         <input type="text" id="categorie" name="name"
                                             class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                                             placeholder="Entrez votre CaTegorie ">
-                                        @error('categorie')
+                                        @error('name')
                                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -132,7 +132,15 @@
                                     <span class="block sm:inline">{{ session('success') }}</span>
 
                                 </div>
+                            @elseif (session('Error'))
+                                <div class="px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded w-80 "
+                                    role="alert">
+                                    <strong class="font-bold">Eroor!</strong>
+                                    <span class="block sm:inline">{{ session('Error') }}</span>
+
+                                </div>
                             @endif
+
                         </div>
 
 

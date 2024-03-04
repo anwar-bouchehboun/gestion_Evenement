@@ -34,11 +34,12 @@ class CategorieController extends Controller
             'name' => 'required|regex:/^[a-zA-Z\s\-\'\.\,\(\)]+$/|max:255'
         ]);
 
-        Categorie::create([
+        $categorie = Categorie::create([
             'name' => $request->name
         ]);
+      
+        return redirect()->route('categorie.index')->with('success', 'Categorie ajoutée avec succès!');
 
-        return redirect()->route('categorie.index')->with('success', 'Spécialité ajoutée avec succès!');
     }
 
     /**

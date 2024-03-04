@@ -84,7 +84,7 @@
                                     <form action="{{ route('dashbord.donpermission',$user) }}" method="post">
                                       @csrf
                                       @method('PUT')
-                                        <button type="submit" class="p-4 px-4 text-xs text-black align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Accepte Permission</button>
+                                        <button type="submit" class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-cyan-600">Accepte Permission</button>
 
                                     </form>
                                     </td>

@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME);
         } else if ($user->HasRole('client')) {
             return redirect()->intended(RouteServiceProvider::CLIENT);
-        } 
+        }
     }
 
 

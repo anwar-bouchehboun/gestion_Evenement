@@ -21,6 +21,7 @@
                             </button>
                         </form>
                     @else
+                    
                         @can('organise')
                             Organisateur
                         @else
