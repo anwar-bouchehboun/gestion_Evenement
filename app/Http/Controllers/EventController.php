@@ -14,8 +14,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        $categories=Categorie::all();
-        return view('organisateur.index',compact('categories'));
+        $events = Event::with('user', 'categorie')->where('user_id', Auth::id())->get();
+     
+        return view('organisateur.index',compact('events'));
     }
 
     /**
@@ -23,7 +24,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Categorie::all();
+        return view('organisateur.index',compact('categories'));
     }
 
     /**
@@ -63,7 +65,7 @@ class EventController extends Controller
             ]
             );
 
-             return redirect()->back();
+             return redirect()->back()->with('success', 'Event Add avec succès.');;
     }
 
     /**

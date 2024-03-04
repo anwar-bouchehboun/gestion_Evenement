@@ -21,4 +21,12 @@ class Event extends Model
         'user_id'
 
     ];
+    public function categorie(){
+        return $this->belongsTo(Categorie::class, 'categories_id');
+
+      }
+      public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+
+      }
 }
