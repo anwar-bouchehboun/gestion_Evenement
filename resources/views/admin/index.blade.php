@@ -83,8 +83,14 @@
                                             Email</th>
                                         <th
                                             class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                            Role</th>
+                                        <th
+                                            class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                             Action</th>
                                     </tr>
+                                    {{-- foreach ($user->roles as $role) {
+                                        echo $role->name . '<br>'; // Afficher le nom du rôle pour chaque utilisateur
+                                    } --}}
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
@@ -95,9 +101,15 @@
                                             <th
                                                 class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                                 {!! $user->email !!}</th>
+                                            <th
+                                                class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                @foreach ($user->roles as $role)
+                                                    {{ $role->name }}
+                                                @endforeach
+                                            </th>
                                             <td class="flex">
                                                 @if ($user->status == 1)
-                                                    <form action="{{ route('refuser.compte',$user) }} " method="post">
+                                                    <form action="{{ route('refuser.compte', $user) }} " method="post">
                                                         @csrf
                                                         @method('PUT')
                                                         <button type="submit"
@@ -105,7 +117,7 @@
 
                                                     </form>
                                                 @else
-                                                    <form action="{{ route('accepte.compte',$user) }}" method="post">
+                                                    <form action="{{ route('accepte.compte', $user) }}" method="post">
                                                         @csrf
                                                         @method('PUT')
                                                         <button type="submit"

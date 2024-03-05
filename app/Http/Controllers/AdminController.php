@@ -12,15 +12,18 @@ class AdminController extends Controller
 {
     public function index()
     {
+
         $categorie = Categorie::count();
         $roles = Role::whereIn('name', ['client', 'organisateur'])->get();
+        // $roles = Role::whereIn('name', ['client'])->get();
         $users = User::whereHas('roles', function ($query) use ($roles) {
             $query->whereIn('name', $roles->pluck('name'));
         })->get();
-        $events=Event::with('user','categorie')->where('validated','=',0)->get();
-        $Allevents=Event::count();
 
-        return view('admin.index', compact('categorie', 'users','events','Allevents'));
+        $events = Event::with('user', 'categorie')->where('validated', '=', 0)->get();
+        $Allevents = Event::count();
+
+        return view('admin.index', compact('categorie', 'users', 'events', 'Allevents'));
 
     }
     public function givePermission()
@@ -49,21 +52,24 @@ class AdminController extends Controller
         $user->revokePermissionTo('organise');
         return redirect()->back();
     }
-    public function acceptevent(Event $event){
+    public function acceptevent(Event $event)
+    {
 
-        $event->validated=1;
+        $event->validated = 1;
         $event->update();
         //    dd( $event->validated);
         return redirect()->back()->with('success', 'Event Accepte avec succès!');
     }
-    public function refuseruser(User $user){
-        $user->status=0;
-       $user->update();
-       return redirect()->back()->with('success', 'User Refuser Acces compte  avec succès!');
+    public function refuseruser(User $user)
+    {
+        $user->status = 0;
+        $user->update();
+        return redirect()->back()->with('success', 'User Refuser Acces compte  avec succès!');
 
     }
-    public function accepteuser(User $user){
-        $user->status=1;
+    public function accepteuser(User $user)
+    {
+        $user->status = 1;
         $user->update();
         return redirect()->back()->with('success', 'User Accepte Acces compte  avec succès!');
     }

@@ -22,11 +22,15 @@ class Event extends Model
 
     ];
     public function categorie(){
-        return $this->belongsTo(Categorie::class, 'categories_id');
+        return $this->belongsTo(Categorie::class,'categories_id');
 
       }
       public function user(){
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class,'user_id');
+
+      }
+      public function reservation(){
+        return $this->hasMany(Reservation::class,'event_id');
 
       }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use DateTime;
 use App\Models\Event;
 use App\Models\Categorie;
@@ -88,7 +89,17 @@ class EventController extends Controller
         ->where('user_id', Auth::id())
         ->where('id', $event->id)
         ->get();
-      return view('organisateur.show',compact('events'));
+
+        $reservations = Reservation::with('event', 'user')
+        ->where('event_id', $event->id)
+        ->whereHas('event', function ($query) {
+            $query->where('status', 'manuel');
+        })
+        ->get();
+
+
+
+         return view('organisateur.show',compact('events','reservations'));
 
     }
 
@@ -156,7 +167,7 @@ class EventController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
-    { 
+    {
         $event->delete();
 
         return redirect()->route('event.index')->with('success', 'Event supprimée avec succès.');
