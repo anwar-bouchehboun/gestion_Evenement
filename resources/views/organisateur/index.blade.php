@@ -132,7 +132,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
-                                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Catégorie ?')"
+                                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Event ?')"
                                                         class="text-red-500 hover:text-red-700">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                             class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">

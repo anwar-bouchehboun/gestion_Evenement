@@ -12,8 +12,10 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::with('user', 'event')->where('user_id', Auth::id())->get();
-        // dd($reservations);
+        $reservations = Reservation::with(['user', 'event'])
+        ->withTrashed() // inclure les éléments soft deleted
+        ->where('user_id', Auth::id())
+        ->get();
         return view('client.index', compact('reservations'));
     }
 

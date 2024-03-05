@@ -172,7 +172,7 @@
                                     <tr class="text-gray-700 dark:text-gray-100">
                                         <th
                                             class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            {{ $reservation->event->title }}</th>
+                                            {!! $reservation->event->title !!} </th>
                                             <th
                                             class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                             {{ $reservation->event->user->name }}</th>
