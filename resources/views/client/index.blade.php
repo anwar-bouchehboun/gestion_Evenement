@@ -164,27 +164,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-gray-700 dark:text-gray-100">
-                                    <th
-                                        class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        Administrator</th>
-                                    <td
-                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        1</td>
-                                    <td
-                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        1</td>
-                                    <td
-                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        1</td>
-                                    <td
-                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                        5</td>
-                                    <td>
-                                        <button
-                                            class="p-4 px-4 text-xs text-black align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Status</button>
-                                    </td>
-                                </tr>
+                                @foreach ($reservations as $reservation)
+                                    <tr class="text-gray-700 dark:text-gray-100">
+                                        <th
+                                            class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                            {{ $reservation->event->title }}</th>
+                                        <td
+                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                            {{ $reservation->event->categorie->name }}</td>
+                                        <td
+                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                            {{ $reservation->event->location }}</td>
+                                        <td
+                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                            {{ $reservation->event->date }}</td>
+                                        <td
+                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                            {{ $reservation->event->status }}</td>
+
+                                            @if($reservation->accepted==false)
+                                              <td
+
+                                         class="p-4 px-4 text-xs text-red-700 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">En cours
+                                        </td>
+                                        @else
+                                        <td>
+                                       <button class="p-4 px-4 text-xs text-blue-700 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Accepte
+
+                                       </button>
+
+                                       </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
 
 
                             </tbody>

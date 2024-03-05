@@ -23,90 +23,112 @@
                                     @foreach ($events as $event)
                                         <div class="flex flex-col w-full gap-3 px-12 py-4 text-white rounded">
                                             <div class="max-w-full">
-                                                <img src="../storage/{{ $event->image }}" class="w-full h-auto"
-                                                    alt="">
+                                                <img src="../storage/{{ $event->image }}" class="w-full h-auto">
+                                            </div>
+                                            <div>
+                                                <div class="mb-1 text-2xl font-semibold text-black">{!! $countReservationsmanul !!} <span class="text-sm font-bold text-blue-400">Reseve</span></div>
                                             </div>
                                             <div class="">
-                                                <h1 class="text-3xl font-extrabold text-neutral-950">{{ $event->title }}
+                                                <h1 class="font-extrabold text-neutral-950">{{ $event->title }}
                                                 </h1>
                                                 <span class="text-[#B5C0D0] ">{{ $event->location }}</span>
                                                 <div class="my-1">
                                                     <p class="font-bold text-black">{{ $event->description }}</p>
                                                 </div>
-                                                <h2 class="text-2xl font-medium text-cyan-700">{{ $event->categorie->name }}
+                                                <h2 class="text-2xl font-medium text-[#B5C0D0]">
+                                                    {{ $event->categorie->name }}
                                                 </h2>
-                                                <h3 class="font-bold text-orange-600">Nombre de réservations : <span
+                                                <h3 class="font-bold text-[#B5C0D0]">Nombre de réservations : <span
                                                         class="font-semibold text-emerald-400">32</span></h3>
                                                 <h5 class="font-medium text-cyan-700">Type de réservation : <span
                                                         class="text-black">{{ $event->status }}</span></h5>
                                             </div>
                                         </div>
                                     @endforeach
-                                    <div class="block w-full overflow-x-auto">
-                                        <table class="items-center w-full bg-transparent border-collapse">
-                                            <thead>
-                                                <tr>
-                                                    <th
-                                                    class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
-                                                  #</th>
-                                                    <th
-                                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
-                                                        name_user</th>
-                                                    <th
-                                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
-                                                        Email</th>
+                                    @foreach ($events as $event)
+                                        @if ($event->status == 'manuel')
+                                            <div class="block w-full overflow-x-auto">
+                                                <table class="items-center w-full bg-transparent border-collapse">
+                                                    <thead>
+                                                        <tr>
+                                                            <th
+                                                                class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                                                #</th>
+                                                            <th
+                                                                class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                                                name_user</th>
+                                                            <th
+                                                                class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                                                Email</th>
 
-                                                    <th
-                                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
-                                                        Ticket</th>
+                                                            <th
+                                                                class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                                                Ticket</th>
 
-                                                    <th
-                                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
-                                                        Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($reservations as $reservation)
-                                                    <tr class="text-gray-700 dark:text-gray-100">
-                                                        <td
-                                                        class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                                        {{ $reservation->id }}
-                                                    </td>
+                                                            <th
+                                                                class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                                                Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($reservations as $reservation)
+                                                            <tr class="text-gray-700 dark:text-gray-100">
+                                                                <td
+                                                                    class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                                    {{ $reservation->id }}
+                                                                </td>
 
-                                                        <td
-                                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                                            {{ $reservation->user->name }}
-                                                        </td>
-                                                        <td
-                                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                                            {{ $reservation->user->email }}
-                                                        </td>
-                                                        <td
-                                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                                            {{ $reservation->event->status }}
-                                                        </td>
-
-
-                                                        <td
-                                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                                            <form id="deleteForm" action="" method="POST">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <button type="submit"
-                                                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Catégorie ?')"
-                                                                    class="text-blue-500 hover:text-red-700">
-                                                                  Accepte Place
-                                                                </button>
-                                                            </form>
-                                                    </td>
-
-                                                    </tr>
-                                                @endforeach
+                                                                <td
+                                                                    class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                                    {{ $reservation->user->name }}
+                                                                </td>
+                                                                <td
+                                                                    class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                                    {{ $reservation->user->email }}
+                                                                </td>
+                                                                <td
+                                                                    class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                                    {{ $reservation->event->status }}
+                                                                </td>
 
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                                <td
+                                                                    class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                                    <form id="deleteForm" action="" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <button type="submit"
+                                                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Catégorie ?')"
+                                                                            class="text-blue-500 hover:text-red-700">
+                                                                            Accepte Place
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+
+                                                            </tr>
+                                                        @endforeach
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        @else
+                                            <div class="p-6 ">
+
+                                                <div
+                                                    class="p-6 bg-white border border-gray-100 rounded-md shadow-md shadow-black/5">
+                                                    <div class="flex justify-between mb-6">
+                                                        <div>
+                                                            <div class="mb-1 text-2xl font-semibold">{!! $countReservationsauto !!}
+                                                            </div>
+                                                            <div class="text-sm font-bold text-blue-400">Reseve</div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                        @endif
+                                    @endforeach
+
                                 </div>
 
                             </div>

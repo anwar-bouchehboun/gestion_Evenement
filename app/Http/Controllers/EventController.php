@@ -86,20 +86,32 @@ class EventController extends Controller
     public function show(Event $event)
     {
         $events = Event::with('user', 'categorie')
-        ->where('user_id', Auth::id())
-        ->where('id', $event->id)
-        ->get();
+            ->where('user_id', Auth::id())
+            ->where('id', $event->id)
+            ->get();
 
         $reservations = Reservation::with('event', 'user')
-        ->where('event_id', $event->id)
-        ->whereHas('event', function ($query) {
-            $query->where('status', 'manuel');
-        })
-        ->get();
+            ->where('event_id', $event->id)
+            ->where('accepted', false)
+            ->whereHas('event', function ($query) {
+                $query->where('status', 'manuel');
+            })
+            ->get();
+
+        $countReservationsauto = Reservation::where('event_id', $event->id)
+            ->whereHas('event', function ($query) {
+                $query->where('status', 'auto');
+            })
+            ->count();
+            $countReservationsmanul = Reservation::where('event_id', $event->id)
+            ->whereHas('event', function ($query) {
+                $query->where('status', 'manuel');
+            })
+            ->count();
 
 
 
-         return view('organisateur.show',compact('events','reservations'));
+        return view('organisateur.show', compact('events', 'reservations', 'countReservationsauto','countReservationsmanul'));
 
     }
 
@@ -110,7 +122,7 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($event->id);
         $categories = Categorie::all();
-     return view('organisateur.edit',compact('event','categories'));
+        return view('organisateur.edit', compact('event', 'categories'));
 
     }
 
@@ -146,7 +158,7 @@ class EventController extends Controller
         }
         $user = Auth::id();
 
-     $event->update(
+        $event->update(
             [
                 'title' => $request->title,
                 'description' => $request->description,
@@ -160,7 +172,7 @@ class EventController extends Controller
 
             ]
         );
-        return redirect()->route('event.index')->with('success','Event updated successfuly !!');
+        return redirect()->route('event.index')->with('success', 'Event updated successfuly !!');
     }
 
     /**
