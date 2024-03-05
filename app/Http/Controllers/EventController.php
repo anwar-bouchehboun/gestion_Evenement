@@ -55,7 +55,7 @@ class EventController extends Controller
             $new_date = $date_requested;
         } else {
             return redirect()->back()->with('Error', 'Event Error avec succès.');
-            ;
+
 
 
         }
@@ -84,7 +84,12 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $events = Event::with('user', 'categorie')
+        ->where('user_id', Auth::id())
+        ->where('id', $event->id)
+        ->get();
+      return view('organisateur.show',compact('events'));
+
     }
 
     /**
@@ -92,6 +97,9 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        $event = Event::findOrFail($event->id);
+        $categories = Categorie::all();
+     return view('organisateur.edit',compact('event','categories'));
 
     }
 
@@ -100,16 +108,58 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'date' => 'required|date',
+            'location' => 'required|string|max:255',
+            'image' => 'required',
+            'number_places' => 'required|integer',
+            'categories_id' => 'required|exists:categories,id',
+            'status' => 'required|in:manuel,auto',
+        ]);
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('EventsImg', 'public');
+        } else {
+            $validated['image'] = $request->input('image');
+        }
+        $date_requested = new DateTime($request->date);
+        $date_today = new DateTime();
+        if ($date_requested > $date_today) {
+            $new_date = $date_requested;
+        } else {
+            return redirect()->back()->with('Error', 'Event Error avec succès.');
 
+
+
+        }
+        $user = Auth::id();
+
+     $event->update(
+            [
+                'title' => $request->title,
+                'description' => $request->description,
+                'date' => $new_date,
+                'location' => $request->location,
+                'image' => $validated['image'],
+                'number_places' => $request->number_places,
+                'categories_id' => $request->categories_id,
+                'status' => $request->status,
+                'user_id' => $user,
+
+            ]
+        );
+        return redirect()->route('event.index')->with('success','Event updated successfuly !!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
-    {
+    { 
         $event->delete();
-        return redirect()->route('Event.index')->with('success', 'Event supprimée avec succès.');
+
+        return redirect()->route('event.index')->with('success', 'Event supprimée avec succès.');
 
     }
 }

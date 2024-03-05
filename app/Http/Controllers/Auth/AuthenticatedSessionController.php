@@ -25,17 +25,20 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        $user = User::where('id', Auth::id())->first();
-        if ($user->HasRole('client')) {
-            return redirect()->intended(RouteServiceProvider::CLIENT);
 
-         } else if($user->HasRole('organisateur')) {
+        $user = User::find(Auth::id());
+
+        if ($user->hasRole('client')) {
+            return redirect()->intended(RouteServiceProvider::CLIENT);
+        } elseif ($user->hasRole('organisateur')) {
             return redirect()->intended(RouteServiceProvider::ORGANISE);
-         }else
-         {
+        } elseif ($user->hasRole('admin')) {
             return redirect()->intended(RouteServiceProvider::HOME);
-         }
+        }
+
+        return redirect()->back();
     }
+
 
 
     public function destroy(Request $request): RedirectResponse

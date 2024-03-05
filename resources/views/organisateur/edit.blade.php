@@ -19,14 +19,15 @@
                         <div class="relative flex-1 flex-grow w-full max-w-full">
                             <h3 class="pb-5 text-sm font-bold text-blue-400 dark:text-gray-50">Cration Evenments </h3>
                             <form class="font-[sans-serif] text-[#333] max-w-4xl mx-auto px-6 my-6 bg-blue-400 p-7 rounded"
-                                action="{{ route('event.store') }}" method="post" enctype="multipart/form-data">
+                                action="{{ route('event.update',$event) }}" method="post" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="grid gap-10 sm:grid-cols-2">
                                     <div class="relative flex items-center">
                                         <label class="text-[13px] absolute top-[-20px] left-0 font-semibold">Title</label>
                                         <input type="text" placeholder="Enter first Title"
-                                            class="w-full px-2 pt-2 pb-2 text-sm bg-white border-b-2 rounded outline-none"
-                                            name="title" />
+                                            class="w-full px-2 pt-2 pb-2 text-sm bg-white border-b-2 outline-none"
+                                            name="title" value="{{ $event->title }}" />
                                         @error('title')
                                             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                         @enderror
@@ -34,8 +35,8 @@
                                     <div class="relative flex items-center">
                                         <label
                                             class="text-[13px] absolute top-[-20px] left-0 font-semibold">Description</label>
-                                        <textarea name="description" id="" class="w-full p-2 text-sm bg-white border-b-2 rounded outline-none "
-                                            placeholder="Enter description"></textarea>
+                                        <textarea name="description" id="" class="w-full p-2 text-sm bg-white border-b-2 outline-none "
+                                            placeholder="Enter description" >{{ $event->description }}</textarea>
                                         @error('description')
                                             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                         @enderror
@@ -43,8 +44,8 @@
                                     <div class="relative flex items-center">
                                         <label class="text-[13px] absolute top-[-20px] left-0 font-semibold">Date
                                             Evenment</label>
-                                        <input type="date" name="date"
-                                            class="rounded px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
+                                        <input type="date" name="date" value="{{ $event->date }}"
+                                            class="px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
                                         @error('date')
                                             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                         @enderror
@@ -53,15 +54,24 @@
                                         <label
                                             class="text-[13px] absolute top-[-20px] left-0 font-semibold">Location</label>
                                         <input type="text" placeholder="Enter Location" name="location"
-                                            class="rounded px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
+                                            value="{{ $event->location }}"
+                                            class="px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
                                         @error('location')
+                                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="relative flex items-center hidden">
+                                        <label class="text-[13px] absolute top-[-20px] left-0 font-semibold">Images</label>
+                                        <input type="text" name="image" value="{{ $event->image }}"
+                                            class="px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
+                                        @error('image')
                                             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="relative flex items-center">
                                         <label class="text-[13px] absolute top-[-20px] left-0 font-semibold">Images</label>
                                         <input type="file" name="image"
-                                            class="rounded px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
+                                            class="px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
                                         @error('image')
                                             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                         @enderror
@@ -70,18 +80,16 @@
                                         <label class="text-[13px] absolute top-[-20px] left-0 font-semibold">Nombre De
                                             place</label>
                                         <input type="text" placeholder="Enter nombre de place " name="number_places"
-                                            class="rounded px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
+                                            value="{{ $event->number_places }}"
+                                            class="px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none" />
                                         @error('number_places')
                                             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="relative flex items-center">
-                                        <label
-                                            class="text-[13px] absolute top-[-20px] left-0 font-semibold">Reservation</label>
-                                        <input type="radio" name="status" value="manuel" class="ms-2 me-2" /> <span
-                                            class="font-bold">Manuel</span>
-                                        <input type="radio" name="status" value="auto" class="ms-2 me-2" /> <span
-                                            class="font-bold">Auto</span>
+                                        <label class="text-[13px] absolute top-[-20px] left-0 font-semibold">Reservation</label>
+                                        <input type="radio" name="status" value="manuel" class="ms-2 me-2" {{ $event->status == 'manuel' ? 'checked' : '' }}/> <span class="font-bold">Manuel</span>
+                                        <input type="radio" name="status" value="auto" class="ms-2 me-2" {{ $event->status == 'auto' ? 'checked' : '' }}/> <span class="font-bold">Auto</span>
                                         @error('status')
                                             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                         @enderror
@@ -90,10 +98,11 @@
                                         <label class="text-[13px] absolute top-[-20px] left-0 font-semibold">First
                                             Name</label>
                                         <select name="categories_id"
-                                            class="rounded px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none">
+                                            class="px-2 pt-2 pb-2 bg-white w-full text-sm border-b-2 border-gray-100 focus:border-[#333] outline-none">
                                             <option value="" selected disabled>Select Categorie</option>
                                             @foreach ($categories as $categorie)
-                                                <option value="{{ $categorie->id }}" class="font-bold ">
+
+                                                <option value="{{ $categorie->id }}" {{ $event->categorie->id == $categorie->id ? 'selected' : '' }} class="font-bold ">
                                                     {{ $categorie->name }}</option>
                                             @endforeach
                                         </select>
@@ -119,7 +128,7 @@
                     @endif
                     @if (session('Error'))
                         <div class="px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded w-80 " role="alert">
-                            <strong class="font-bold">Error date creer  apres date now  !</strong>
+                            <strong class="font-bold">Error date creer apres date now !</strong>
                             <span class="block sm:inline">{{ session('Error') }}</span>
 
                         </div>

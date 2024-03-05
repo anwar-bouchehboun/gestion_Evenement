@@ -8,9 +8,9 @@
 
         <!-- Content -->
         <h2 class="   text-[#f84525] text-3xl font-bold m-2">CATEGORIE</h2>
-        <div class=" " style=" width:50%; margin:auto;">
+        <div class="" style=" width:50%; margin:auto;">
 
-            <div class="   bg-slate-50 rounded p-20" style="margin-left: 0%;">
+            <div class="p-20 rounded  bg-slate-50" style="margin-left: 0%;">
                 <h2 class="mb-4 text-xl font-semibold">Formulaire Modifier de CaTegorie
                 </h2>
                 <form action="{{ route('categorie.update', $categorie) }}" method="POST" class="w-64 mx-auto">
@@ -45,7 +45,7 @@
 
     </main>
 @endsection
-<script>
+{{-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         const boutonOuvrirPopup = document.getElementById('ouvrirPopup');
         const boutonFermerPopup = document.getElementById('fermerPopup');
@@ -59,4 +59,4 @@
             popup.classList.add('hidden');
         });
     });
-</script>
+</script> --}}
