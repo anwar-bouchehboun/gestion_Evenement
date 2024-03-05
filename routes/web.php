@@ -45,6 +45,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth','role:organisateur'])->group(function(){
  Route::resource('/event', EventController::class);
+ Route::put('/accepte/{reservation}',[EventController::class, 'acceptereserve'])->name('accepte.reservation');
 });
 
 

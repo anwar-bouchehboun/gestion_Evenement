@@ -145,6 +145,10 @@
                                     <th
                                         class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                         name_Event</th>
+                                        <th
+                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                        organisateur</th>
+
                                     <th
                                         class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                         Categorie</th>
@@ -169,6 +173,9 @@
                                         <th
                                             class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                             {{ $reservation->event->title }}</th>
+                                            <th
+                                            class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                            {{ $reservation->event->user->name }}</th>
                                         <td
                                             class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                             {{ $reservation->event->categorie->name }}</td>
@@ -182,18 +189,19 @@
                                             class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                             {{ $reservation->event->status }}</td>
 
-                                            @if($reservation->accepted==false)
-                                              <td
-
-                                         class="p-4 px-4 text-xs text-red-700 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">En cours
-                                        </td>
+                                        @if ($reservation->accepted == false)
+                                            <td
+                                                class="p-4 px-4 text-xs text-red-700 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                En cours
+                                            </td>
                                         @else
-                                        <td>
-                                       <button class="p-4 px-4 text-xs text-blue-700 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Accepte
+                                            <td>
+                                                <button
+                                                    class="p-4 px-4 text-xs text-blue-700 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Accepte
 
-                                       </button>
+                                                </button>
 
-                                       </td>
+                                            </td>
                                         @endif
                                     </tr>
                                 @endforeach

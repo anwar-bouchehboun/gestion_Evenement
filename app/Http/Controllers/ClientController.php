@@ -13,6 +13,7 @@ class ClientController extends Controller
     public function index()
     {
         $reservations = Reservation::with('user', 'event')->where('user_id', Auth::id())->get();
+        // dd($reservations);
         return view('client.index', compact('reservations'));
     }
 

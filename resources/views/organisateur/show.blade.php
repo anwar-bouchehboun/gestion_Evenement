@@ -21,30 +21,22 @@
                             <div class="max-w-6xl mx-auto text-[#333] font-[sans-serif]">
                                 <div class="grid gap-4 mt-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
                                     @foreach ($events as $event)
-                                        <div class="flex flex-col w-full gap-3 px-12 py-4 text-white rounded">
-                                            <div class="max-w-full">
-                                                <img src="../storage/{{ $event->image }}" class="w-full h-auto">
-                                            </div>
-                                            <div>
-                                                <div class="mb-1 text-2xl font-semibold text-black">{!! $countReservationsmanul !!} <span class="text-sm font-bold text-blue-400">Reseve</span></div>
-                                            </div>
-                                            <div class="">
-                                                <h1 class="font-extrabold text-neutral-950">{{ $event->title }}
-                                                </h1>
-                                                <span class="text-[#B5C0D0] ">{{ $event->location }}</span>
-                                                <div class="my-1">
-                                                    <p class="font-bold text-black">{{ $event->description }}</p>
+                                    <div class="overflow-hidden">
+                                        <img src="../storage/{{ $event->image }}" alt="{{ $event->title }}" class="object-cover w-full h-64">
+                                        <div class="p-6">
+                                            <h2 class="text-xl font-bold text-gray-800">{{ $event->title }}</h2>
+                                            <p class="text-sm text-[#387ADF]">{{ $event->location }}</p>
+                                            <p class="mt-2 text-gray-700">{{ $event->description }}</p>
+                                            <p class="mt-2 text-[#387ADF]">Catégorie : {{ $event->categorie->name }}</p>
+                                            <div class="flex items-center justify-between mt-4">
+                                                <div class="text-sm text-gray-600">Nombre de réservations : <span class="text-[#387ADF]">{{ $event->number_places }}</span> </div>
+                                                 <div>
+                                                    <h3  class="text-blue-500 hover:text-blue-700">{!! $countReservationsmanul !!} <span class="text-black"> Reserve</span></h3>
                                                 </div>
-                                                <h2 class="text-2xl font-medium text-[#B5C0D0]">
-                                                    {{ $event->categorie->name }}
-                                                </h2>
-                                                <h3 class="font-bold text-[#B5C0D0]">Nombre de réservations : <span
-                                                        class="font-semibold text-emerald-400">32</span></h3>
-                                                <h5 class="font-medium text-cyan-700">Type de réservation : <span
-                                                        class="text-black">{{ $event->status }}</span></h5>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    </div>
+                                @endforeach
                                     @foreach ($events as $event)
                                         @if ($event->status == 'manuel')
                                             <div class="block w-full overflow-x-auto">
@@ -94,11 +86,11 @@
 
                                                                 <td
                                                                     class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                                                    <form id="deleteForm" action="" method="POST">
+                                                                    <form  action="{{ route('accepte.reservation',$reservation) }}" method="POST">
                                                                         @csrf
                                                                         @method('PUT')
                                                                         <button type="submit"
-                                                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Catégorie ?')"
+                                                                            onclick="return confirm('Êtes-vous sûr de vouloir Accpte cette Reservation ?')"
                                                                             class="text-blue-500 hover:text-red-700">
                                                                             Accepte Place
                                                                         </button>

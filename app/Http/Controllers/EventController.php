@@ -185,4 +185,10 @@ class EventController extends Controller
         return redirect()->route('event.index')->with('success', 'Event supprimée avec succès.');
 
     }
+    public function acceptereserve(Reservation $reservation){
+        $reservation->accepted = 1;
+        $reservation->update();
+        return redirect()->back();
+
+    }
 }
