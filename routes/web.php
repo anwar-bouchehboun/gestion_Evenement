@@ -35,6 +35,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/givepermission',[AdminController::class, 'givePermission'])->name('dashbord.permission');
     Route::put('/permission/accepte/{user}',[AdminController::class, 'updatepermsioon'])->name('dashbord.donpermission');
     Route::put('/permission/refuser/{user}',[AdminController::class, 'RefuserPission'])->name('dashbord.refuser');
+    Route::put('/accepet/{event}',[AdminController::class, 'acceptevent'])->name('dashbord.event');
+    Route::put('/compte/refuser/{user}',[AdminController::class, 'refuseruser'])->name('refuser.compte');
+    Route::put('/compte/accepte/{user}',[AdminController::class, 'accepteuser'])->name('accepte.compte');
+
+
 
 });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Event;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -13,14 +14,13 @@ class AdminController extends Controller
     {
         $categorie = Categorie::count();
         $roles = Role::whereIn('name', ['client', 'organisateur'])->get();
-
-        // Récupérer les utilisateurs ayant l'un des rôles spécifiés
         $users = User::whereHas('roles', function ($query) use ($roles) {
             $query->whereIn('name', $roles->pluck('name'));
         })->get();
+        $events=Event::with('user','categorie')->where('validated','=',0)->get();
+        $Allevents=Event::count();
 
-
-        return view('admin.index', compact('categorie', 'users'));
+        return view('admin.index', compact('categorie', 'users','events','Allevents'));
 
     }
     public function givePermission()
@@ -48,5 +48,23 @@ class AdminController extends Controller
         $user->update();
         $user->revokePermissionTo('organise');
         return redirect()->back();
+    }
+    public function acceptevent(Event $event){
+
+        $event->validated=1;
+        $event->update();
+        //    dd( $event->validated);
+        return redirect()->back()->with('success', 'Event Accepte avec succès!');
+    }
+    public function refuseruser(User $user){
+        $user->status=0;
+       $user->update();
+       return redirect()->back()->with('success', 'User Refuser Acces compte  avec succès!');
+
+    }
+    public function accepteuser(User $user){
+        $user->status=1;
+        $user->update();
+        return redirect()->back()->with('success', 'User Accepte Acces compte  avec succès!');
     }
 }

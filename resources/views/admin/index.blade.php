@@ -54,7 +54,7 @@
                 <div class="p-6 bg-white border border-gray-100 rounded-md shadow-md shadow-black/5">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="mb-1 text-2xl font-semibold">100</div>
+                            <div class="mb-1 text-2xl font-semibold">{!! $Allevents !!}</div>
                             <div class="text-sm font-bold text-blue-400">Evenement</div>
                         </div>
 
@@ -96,20 +96,23 @@
                                                 class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                                 {!! $user->email !!}</th>
                                             <td class="flex">
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit"
-                                                        class="p-4 px-4 text-xs text-red-600 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Desactive</button>
+                                                @if ($user->status == 1)
+                                                    <form action="{{ route('refuser.compte',$user) }} " method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit"
+                                                            class="p-4 px-4 text-xs text-red-600 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Desactive</button>
 
-                                                </form>
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit"
-                                                        class="p-4 px-4 text-xs text-blue-600 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Active</button>
+                                                    </form>
+                                                @else
+                                                    <form action="{{ route('accepte.compte',$user) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit"
+                                                            class="p-4 px-4 text-xs text-blue-600 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Active</button>
 
-                                                </form>
+                                                    </form>
+                                                @endif
                                             </td>
 
                                         </tr>
@@ -142,52 +145,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="text-gray-700 dark:text-gray-100">
-                                        <th
-                                            class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            Administrator</th>
-                                        <td
-                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            1</td>
-                                        <td
-                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            5</td>
-                                        <td>
-                                            <button
-                                                class="p-4 px-4 text-xs text-black align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Status</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="text-gray-700 dark:text-gray-100">
-                                        <th
-                                            class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            User</th>
-                                        <td
-                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            6</td>
-                                        <td
-                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            5</td>
-                                        <td>
-                                            <button
-                                                class="p-4 px-4 text-xs text-black align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Status</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="text-gray-700 dark:text-gray-100">
-                                        <th
-                                            class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            Organsateur</th>
-                                        <td
-                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            5</td>
-                                        <td
-                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            5</td>
-                                        <td>
-                                            <button
-                                                class="p-4 px-4 text-xs text-black align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Status</button>
-                                        </td>
-                                    </tr>
-
+                                    @foreach ($events as $event)
+                                        <tr class="text-gray-700 dark:text-gray-100">
+                                            <th
+                                                class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                {{ $event->title }} </th>
+                                            <td
+                                                class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                {{ $event->categorie->name }}</td>
+                                            <td
+                                                class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                {{ $event->date }}</td>
+                                            <td>
+                                                <form action="{{ route('dashbord.event', $event) }}" method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit"
+                                                        class="p-4 px-4 text-xs text-black text-teal-500 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Accepet
+                                                        Event</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
