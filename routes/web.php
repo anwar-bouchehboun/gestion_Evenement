@@ -20,6 +20,8 @@ use App\Http\Controllers\CategorieController;
 */
 
 Route::get('/', [HomeController::class,'index'])->name('Home');
+Route::post('/search', [HomeController::class,'search'])->name('search');
+
 
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('client');

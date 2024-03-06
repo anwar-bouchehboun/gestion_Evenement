@@ -15,20 +15,36 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Categorie::all();
-        $events=Event::count();
-        $organisateur=User::where('role','=',2)->count();
-        $date=now()->toDateTimeString();
+        $events = Event::count();
+        $organisateur = User::where('role', '=', 2)->count();
+        $date = now()->toDateTimeString();
         $eventaffiche = Event::with('user', 'categorie')
-        ->where('number_places', '!=', 0)
-        ->where('date', '>', $date)
-        ->where('validated', true)
-        ->paginate(6);
-           return view('welcome',compact('events','organisateur','categories','eventaffiche'));
+            ->where('number_places', '!=', 0)
+            ->where('date', '>', $date)
+            ->where('validated', true)
+            ->paginate(6);
+        return view('welcome', compact('events', 'organisateur', 'categories', 'eventaffiche'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function search(Request $request)
+    {
+
+        $categories = Categorie::all();
+        $events = Event::count();
+        $organisateur = User::where('role', '=', 2)->count();
+        $searchQuery = $request->input('search');
+
+        $date = now()->toDateTimeString();
+        $eventaffiche = Event::with('user', 'categorie')
+            ->where('number_places', '!=', 0)
+            ->where('date', '>', $date)
+            ->where('validated', true)
+            ->where('title', 'like', '%' . $searchQuery . '%')
+            ->paginate(1);
+            // dd($eventsearch);
+            return view('welcome',compact('events', 'organisateur', 'categories', 'eventaffiche'));
+
+    }
     public function create()
     {
         //

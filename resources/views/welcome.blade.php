@@ -90,39 +90,43 @@
                     </div>
                 </div>
                 <hr class="my-12 border-gray-300" />
-                <h2 class="mb-6 text-3xl font-extrabold text-center md:text-4xl">Our Category</h2>
-                <div class="grid items-center grid-cols-2 gap-4 md:grid-cols-4">
-                    @foreach ($categories as $categorie)
-                        <a href=""
-                            class="px-6 py-2.5 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600 text-center">
-                            {{ $categorie->name }}
-                        </a>
-                    @endforeach
-
-                </div>
-
             </div>
-            {{-- <img src="https://readymadeui.com/bg-effect.svg" class="absolute inset-0 w-full h-full" /> --}}
         </div>
-
         <div class="px-4 sm:px-10">
-            <div class="mx-auto mt-32 max-w-7xl">
+            <div class="mx-auto mt-22 max-w-7xl">
                 <div class="max-w-2xl mx-auto mb-16 text-center">
                     <h2 class="mb-6 text-3xl font-extrabold md:text-4xl">Our Events</h2>
                     <p class="mt-6">Engaging and dynamic events tailored to your needs. Unforgettable experiences,
                         expertly crafted for lasting impact</p>
                 </div>
-                <div class="relative flex mx-auto text-center mb-7 sm:w-64 md:w-80 lg:w-96">
-                    <input type="search"
-                        class="relative m-0 -me-0.5 block flex-auto rounded-s border border-solid border-blue-500 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-surface outline-none transition duration-200 ease-in-out placeholder:text-neutral-500 focus:z-[3] focus:border-primary focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white dark:placeholder:text-neutral-200 dark:autofill:shadow-autofill dark:focus:border-primary"
-                        placeholder="Search" aria-label="Search" id="exampleFormControlInput3"
-                        aria-describedby="button-addon3" />
-                    <button
-                        class="bg-cyan-600 z-[2] inline-block rounded-e border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-accent-300 hover:bg-primary-50/50 hover:text-primary-accent-300 focus:border-primary-600 focus:bg-primary-50/50 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:text-primary-500"
-                        data-twe-ripple-init data-twe-ripple-color="white" type="button" id="button-addon3">
-                        Search
-                    </button>
+                <div class="relative">
+                    <form action="{{ route('search') }}" method="post"
+                        class="flex mx-auto text-center mb-7 sm:w-64 md:w-80 lg:w-96">
+                        @csrf
+
+                        <input type="search" name="search"
+                            class="relative m-0 -me-0.5 block flex-auto rounded-s border border-solid border-blue-500 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-surface outline-none transition duration-200 ease-in-out placeholder:text-neutral-500 focus:z-[3] focus:border-primary focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white dark:placeholder:text-neutral-200 dark:autofill:shadow-autofill dark:focus:border-primary"
+                            placeholder="Search" aria-label="Search" id="exampleFormControlInput3"
+                            aria-describedby="button-addon3" />
+
+                        <button type="submit"
+                            class="bg-cyan-600 z-[2] inline-block rounded-e border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-accent-300 hover:bg-primary-50/50 hover:text-primary-accent-300 focus:border-primary-600 focus:bg-primary-50/50 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:text-primary-500"
+                            data-twe-ripple-init data-twe-ripple-color="white" type="button" id="button-addon3">
+                            Search
+                        </button>
+                    </form>
+
+                    <div class="grid items-center grid-cols-2 gap-4 mb-3 md:grid-cols-4">
+                        @foreach ($categories as $categorie)
+                            <a href=""
+                                class="px-6 py-2.5 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600 text-center">
+                                {{ $categorie->name }}
+                            </a>
+                        @endforeach
+
+                    </div>
                 </div>
+
                 @if (count($eventaffiche))
                     <div class="grid gap-8 mx-auto lg:grid-cols-3 md:grid-cols-2 max-md:max-w-lg">
 
@@ -148,23 +152,26 @@
                                 </div>
                             </div> --}}
                             <div
-                            class="sm:p-2 p-2 flex bg-white rounded-md border shadow-[0_14px_40px_-11px_rgba(93,96,127,0.2)]">
+                                class="sm:p-2 p-2 flex bg-white rounded-md border shadow-[0_14px_40px_-11px_rgba(93,96,127,0.2)]">
 
                                 <div class="w-40 ">
-                                    <img alt="ecommerce" class="block object-cover object-center h-48 w-62 " src="../storage/{{ $event->image }}">
+                                    <img alt="ecommerce" class="block object-cover object-center h-48 w-62 "
+                                        src="../storage/{{ $event->image }}">
 
                                 </div>
 
                                 <div class="px-2 mt-10">
-                                  <h3 class="mb-1 text-xs tracking-widest text-gray-500 title-font">{{ $event->categorie->name }}</h3>
-                                  <h2 class="font-extrabold text-gray-900 title-font">{{ $event->title }}</h2>
-                                  <h4 class="mb-2 font-normal text-gray-400">{{ $event->location }} -<span
-                                    class="text-blue-500 "> {{ $event->date }}</span>
-                                    <h5 class="mb-2 font-semibold">{{ $event->user->name }}</h5>
-                                    <a href=""
-                                        class="text-[#7e7ed8] font-medium text-sm hover:text-red-800 float-end mt-5">View</a>
+                                    <h3 class="mb-1 text-xs tracking-widest text-gray-500 title-font">
+                                        {{ $event->categorie->name }}</h3>
+                                    <h2 class="font-extrabold text-gray-900 title-font">{{ $event->title }}</h2>
+                                    <h4 class="mb-2 font-normal text-gray-400">{{ $event->location }} -<span
+                                            class="text-blue-500 "> {{ $event->date }}</span>
+                                        <h5 class="mb-2 font-semibold">{{ $event->user->name }}</h5>
+                                        <a href=""
+   class="text-[#fff] font-medium text-sm hover:text-red-800 float-end mt-2 border border-cyan-400 py-1 px-3 bg-cyan-400">View</a>
+
                                 </div>
-                              </div>
+                            </div>
                         @endforeach
 
                     </div>
@@ -172,10 +179,10 @@
                         {{ $eventaffiche->links() }}
 
                     </div>
-
                 @else
                     <h1 class="mb-6 font-medium text-center text-1xl md:text-2xl">Not Event Today</h1>
                 @endif
+
 
             </div>
         </div>
