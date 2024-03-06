@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Event;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,7 +14,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::all();
+        $events=Event::count();
+        $organisateur=User::where('role','=',2)->count();
+        $date=now()->toDateTimeString();
+        $eventaffiche = Event::with('user', 'categorie')
+        ->where('number_places', '!=', 0)
+        ->where('date', '>', $date)
+        ->where('validated', true)
+        ->paginate(6);
+           return view('welcome',compact('events','organisateur','categories','eventaffiche'));
     }
 
     /**

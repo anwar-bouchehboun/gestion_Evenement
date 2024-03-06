@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
@@ -18,9 +19,7 @@ use App\Http\Controllers\CategorieController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class,'index'])->name('Home');
 
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('client');

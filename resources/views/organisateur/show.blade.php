@@ -29,7 +29,7 @@
                                             <p class="mt-2 text-gray-700">{{ $event->description }}</p>
                                             <p class="mt-2 text-[#387ADF]">Catégorie : {{ $event->categorie->name }}</p>
                                             <div class="flex items-center justify-between mt-4">
-                                                <div class="text-sm text-gray-600">Nombre de réservations : <span class="text-[#387ADF]">{{ $event->number_places }}</span> </div>
+                                                <div class="text-sm text-gray-600">Nombre de Place : <span class="text-[#387ADF]">{{ $event->number_places }}</span> </div>
                                                  <div>
                                                     <h3  class="text-blue-500 hover:text-blue-700">{!! $countReservationsmanul !!} <span class="text-black"> Reserve</span></h3>
                                                 </div>
