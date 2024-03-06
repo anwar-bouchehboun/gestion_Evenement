@@ -61,6 +61,7 @@ class HomeController extends Controller
             ->where('validated', true)
             ->where('categories_id', '=', $categorie)
             ->paginate(6);
+            // fillrager
         return view('welcome', compact('events', 'organisateur', 'categories', 'eventaffiche'));
 
 
