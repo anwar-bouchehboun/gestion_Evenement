@@ -47,6 +47,19 @@
                                 <li class='px-3 max-lg:border-b max-lg:py-2'><a href='{{ route('client') }}'
                                         class='block font-bold transition-all lg:hover:text-blue-600'>Dashbord</a>
                                 </li>
+                                <li class='px-3 max-lg:border-b max-lg:py-2'>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+
+                                        <x-responsive-nav-link :href="route('logout')"
+                                        class='block font-bold transition-all lg:hover:text-blue-600'
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </x-responsive-nav-link>
+                                    </form>
+                            </li>
+
                             @endrole
                         @else
                             <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
@@ -179,7 +192,7 @@
                                             class="text-blue-500 "> {{ $event->date }}</span>
                                         <h5 class="mb-2 font-semibold">{{ $event->user->name }}</h5>
                                         <a href="{{ route('show.event',$event) }}"
-                                            class="text-[#fff] font-medium text-sm hover:text-red-800 float-end mt-2 border border-cyan-400 py-1 px-3 bg-cyan-400">View</a>
+                                            class="text-[#fff] font-medium text-sm hover:text-red-800 float-end mt-2 border border-cyan-400 py-1 px-3 bg-cyan-400 rounded">View</a>
 
                                 </div>
                             </div>

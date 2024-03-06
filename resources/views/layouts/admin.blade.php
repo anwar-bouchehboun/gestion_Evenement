@@ -1379,6 +1379,8 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                                 @csrf
 
                                 <x-responsive-nav-link :href="route('logout')"
+                                class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3"
+
                                     onclick="event.preventDefault();
 
                                                 this.closest('form').submit();">
@@ -1422,6 +1424,8 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                         @csrf
 
                         <x-responsive-nav-link :href="route('logout')"
+                        class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
+
                             onclick="event.preventDefault();
 
                                     this.closest('form').submit();">
@@ -1452,6 +1456,8 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
+                    class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100"
+
                         onclick="event.preventDefault();
 
                                 this.closest('form').submit();">
