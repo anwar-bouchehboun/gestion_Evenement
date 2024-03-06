@@ -159,9 +159,7 @@
                                     <th
                                         class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                         Date</th>
-                                    <th
-                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
-                                        Ticket</th>
+
                                     <th
                                         class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                         Action</th>
@@ -185,9 +183,9 @@
                                         <td
                                             class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                             {{ $reservation->event->date }}</td>
-                                        <td
+                                        {{-- <td
                                             class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            {{ $reservation->event->status }}</td>
+                                            {{ $reservation->event->status }}</td> --}}
 
                                         @if ($reservation->accepted == false)
                                             <td

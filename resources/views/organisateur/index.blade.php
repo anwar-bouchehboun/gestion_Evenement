@@ -9,13 +9,12 @@
 
         <div class="p-6">
             @if (session('success'))
-            <div class="px-4 py-3 text-green-700 bg-green-100 border border-green-400 rounded w-80 "
-                role="alert">
-                <strong class="font-bold">Succès!</strong>
-                <span class="block sm:inline">{{ session('success') }}</span>
+                <div class="px-4 py-3 text-green-700 bg-green-100 border border-green-400 rounded w-80 " role="alert">
+                    <strong class="font-bold">Succès!</strong>
+                    <span class="block sm:inline">{{ session('success') }}</span>
 
-            </div>
-        @endif
+                </div>
+            @endif
             <h2 class="  text-[#f84525] text-3xl font-bold pb-2">Evenments</h2>
             {{-- <div class="p-2 mb-6 text-center rounded bg-[#FEECE2] w-60">
                 <div class="font-bold text-blue-500 uppercase ">
@@ -54,8 +53,8 @@
                                 <thead>
                                     <tr>
                                         <th
-                                        class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
-                                      #</th>
+                                            class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
+                                            #</th>
                                         <th
                                             class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                             name_Event</th>
@@ -87,12 +86,12 @@
                                     @foreach ($events as $event)
                                         <tr class="text-gray-700 dark:text-gray-100">
                                             <td
-                                            class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                            {{ $event->id }}
-                                        </td>
+                                                class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                                {{ $event->id }}
+                                            </td>
                                             <th
                                                 class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                               <a href="{{ route('event.show',$event) }}">{{ $event->title }}</a>
+                                                <a href="{{ route('event.show', $event) }}">{{ $event->title }}</a>
                                             </th>
                                             <td
                                                 class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
@@ -128,7 +127,8 @@
                                                             data-original="#000000" />
                                                     </svg>
                                                 </a>
-                                                <form id="deleteForm{{$event->id}}" action="{{ route('event.destroy',$event) }}" method="POST">
+                                                <form id="deleteForm{{ $event->id }}"
+                                                    action="{{ route('event.destroy', $event) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
