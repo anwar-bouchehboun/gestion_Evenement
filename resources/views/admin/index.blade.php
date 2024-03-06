@@ -42,7 +42,7 @@
                     <div class="flex justify-between mb-4">
                         <div>
                             <div class="flex items-center mb-1">
-                                <div class="text-2xl font-semibold">100</div>
+                                <div class="text-2xl font-semibold">{!! $reservation !!}</div>
                                 {{-- <div class="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">+30%</div> --}}
                             </div>
                             <div class="text-sm font-bold text-blue-400">Réservation</div>

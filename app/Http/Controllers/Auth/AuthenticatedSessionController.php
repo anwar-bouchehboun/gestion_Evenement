@@ -19,7 +19,6 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
@@ -27,13 +26,16 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = User::find(Auth::id());
-
-        if ($user->hasRole('client')) {
-            return redirect()->intended(RouteServiceProvider::CLIENT);
-        } elseif ($user->hasRole('organisateur')) {
-            return redirect()->intended(RouteServiceProvider::ORGANISE);
-        } elseif ($user->hasRole('admin')) {
-            return redirect()->intended(RouteServiceProvider::HOME);
+        if ($user->status == 1) {
+            if ($user->hasRole('client')) {
+                return redirect()->intended(RouteServiceProvider::CLIENT);
+            } elseif ($user->hasRole('organisateur')) {
+                return redirect()->intended(RouteServiceProvider::ORGANISE);
+            } elseif ($user->hasRole('admin')) {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
+        } else {
+            abort(401);
         }
 
         return redirect()->back();

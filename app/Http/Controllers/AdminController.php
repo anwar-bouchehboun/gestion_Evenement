@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Categorie;
@@ -14,6 +15,7 @@ class AdminController extends Controller
     {
 
         $categorie = Categorie::count();
+        $reservation=Reservation::count();
         $roles = Role::whereIn('name', ['client', 'organisateur'])->get();
         // $roles = Role::whereIn('name', ['client'])->get();
         $users = User::whereHas('roles', function ($query) use ($roles) {
@@ -23,7 +25,7 @@ class AdminController extends Controller
         $events = Event::with('user', 'categorie')->where('validated', '=', 0)->get();
         $Allevents = Event::count();
 
-        return view('admin.index', compact('categorie', 'users', 'events', 'Allevents'));
+        return view('admin.index', compact('categorie', 'users', 'events', 'Allevents','reservation'));
 
     }
     public function givePermission()
