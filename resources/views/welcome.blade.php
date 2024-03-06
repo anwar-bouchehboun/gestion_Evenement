@@ -100,8 +100,11 @@
                         expertly crafted for lasting impact</p>
                 </div>
                 <div class="relative">
+                    <div>
+
+                    </div>
                     <form action="{{ route('search') }}" method="post"
-                        class="flex mx-auto text-center mb-7 sm:w-64 md:w-80 lg:w-96">
+                        class="flex mx-auto mb-3 text-center sm:w-64 md:w-80 lg:w-96">
                         @csrf
 
                         <input type="search" name="search"
@@ -115,15 +118,23 @@
                             Search
                         </button>
                     </form>
+                    <div class="mx-auto mb-5 text-center">
+                        <a href="{{ route('Home') }}"
+                            class="px-8 py-2.5 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600 text-center">
+                            All
+                        </a>
+                    </div>
 
-                    <div class="grid items-center grid-cols-2 gap-4 mb-3 md:grid-cols-4">
-                        @foreach ($categories as $categorie)
-                            <a href=""
-                                class="px-6 py-2.5 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600 text-center">
-                                {{ $categorie->name }}
-                            </a>
-                        @endforeach
-
+                    <div class="">
+                        <form action="{{ route('filtrer') }}" method="post"  class="grid items-center grid-cols-2 gap-4 mb-3 md:grid-cols-4">
+                          @csrf
+                            @foreach ($categories as $categorie)
+                                <button type="submit" name="categorie" value="{{ $categorie->id }}"
+                                    class="px-6 py-2.5 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600 text-center">
+                                    {{ $categorie->name }}
+                                </button>
+                            @endforeach
+                        </form>
                     </div>
                 </div>
 
@@ -168,7 +179,7 @@
                                             class="text-blue-500 "> {{ $event->date }}</span>
                                         <h5 class="mb-2 font-semibold">{{ $event->user->name }}</h5>
                                         <a href=""
-   class="text-[#fff] font-medium text-sm hover:text-red-800 float-end mt-2 border border-cyan-400 py-1 px-3 bg-cyan-400">View</a>
+                                            class="text-[#fff] font-medium text-sm hover:text-red-800 float-end mt-2 border border-cyan-400 py-1 px-3 bg-cyan-400">View</a>
 
                                 </div>
                             </div>

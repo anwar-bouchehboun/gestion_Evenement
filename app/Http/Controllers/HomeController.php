@@ -40,9 +40,29 @@ class HomeController extends Controller
             ->where('date', '>', $date)
             ->where('validated', true)
             ->where('title', 'like', '%' . $searchQuery . '%')
-            ->paginate(1);
-            // dd($eventsearch);
-            return view('welcome',compact('events', 'organisateur', 'categories', 'eventaffiche'));
+            ->paginate(6);
+
+
+        // dd($eventaffiche);
+
+        return view('welcome', compact('events', 'organisateur', 'categories', 'eventaffiche'));
+
+    }
+    public function filtrer(Request $request)
+    {
+        $categorie = $request->input('categorie');
+        $categories = Categorie::all();
+        $events = Event::count();
+        $organisateur = User::where('role', '=', 2)->count();
+        $date = now()->toDateTimeString();
+        $eventaffiche = Event::with('user', 'categorie')
+            ->where('number_places', '!=', 0)
+            ->where('date', '>', $date)
+            ->where('validated', true)
+            ->where('categories_id', '=', $categorie)
+            ->paginate(6);
+        return view('welcome', compact('events', 'organisateur', 'categories', 'eventaffiche'));
+
 
     }
     public function create()

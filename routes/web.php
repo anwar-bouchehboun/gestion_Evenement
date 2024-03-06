@@ -21,6 +21,7 @@ use App\Http\Controllers\CategorieController;
 
 Route::get('/', [HomeController::class,'index'])->name('Home');
 Route::post('/search', [HomeController::class,'search'])->name('search');
+Route::post('/filtrer', [HomeController::class,'filtrer'])->name('filtrer');
 
 
 Route::middleware(['auth', 'role:client'])->group(function () {
