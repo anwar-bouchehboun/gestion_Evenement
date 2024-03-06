@@ -81,9 +81,7 @@
                                         <th
                                             class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                             Email</th>
-                                        <th
-                                            class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
-                                            Role</th>
+
                                         <th
                                             class="px-4 py-3 text-xs font-semibold text-left text-gray-500 uppercase align-middle bg-gray-100 border border-l-0 border-r-0 border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 whitespace-nowrap">
                                             Action</th>
@@ -101,12 +99,7 @@
                                             <th
                                                 class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                                 {!! $user->email !!}</th>
-                                            <th
-                                                class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                                                @foreach ($user->roles as $role)
-                                                    {{ $role->name }}
-                                                @endforeach
-                                            </th>
+        
                                             <td class="flex">
                                                 @if ($user->status == 1)
                                                     <form action="{{ route('refuser.compte', $user) }} " method="post">

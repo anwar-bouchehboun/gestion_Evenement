@@ -35,7 +35,10 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->intended(RouteServiceProvider::HOME);
             }
         } else {
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
             abort(401);
+
         }
 
         return redirect()->back();

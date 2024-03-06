@@ -15,17 +15,18 @@ class AdminController extends Controller
     {
 
         $categorie = Categorie::count();
-        $reservation=Reservation::count();
-        $roles = Role::whereIn('name', ['client', 'organisateur'])->get();
+        $reservation = Reservation::count();
+        // $roles = Role::whereIn('name', ['client', 'organisateur'])->get();
         // $roles = Role::whereIn('name', ['client'])->get();
-        $users = User::whereHas('roles', function ($query) use ($roles) {
-            $query->whereIn('name', $roles->pluck('name'));
-        })->get();
+        $users = User::where('role', '2')->orWhere('role', '3')->get();
+        // $users = User::whereHas('roles', function ($query) use ($roles) {
+        //     $query->whereIn('name', $roles->pluck('name'));
+        // })->get();
 
         $events = Event::with('user', 'categorie')->where('validated', '=', 0)->get();
         $Allevents = Event::count();
 
-        return view('admin.index', compact('categorie', 'users', 'events', 'Allevents','reservation'));
+        return view('admin.index', compact('categorie', 'users', 'events', 'Allevents', 'reservation'));
 
     }
     public function givePermission()
@@ -65,6 +66,14 @@ class AdminController extends Controller
     public function refuseruser(User $user)
     {
         $user->status = 0;
+        if ($user->hasRole('client')) {
+            $user->removeRole('client');
+        } else {
+            $user->removeRole('organisateur');
+        }
+
+
+
         $user->update();
         return redirect()->back()->with('success', 'User Refuser Acces compte  avec succès!');
 
@@ -72,6 +81,13 @@ class AdminController extends Controller
     public function accepteuser(User $user)
     {
         $user->status = 1;
+        if ($user->role == 3) {
+            $user->assignRole('client');
+        } elseif ($user->role == 2) {
+            $user->assignRole('organisateur');
+        }
+
+
         $user->update();
         return redirect()->back()->with('success', 'User Accepte Acces compte  avec succès!');
     }
