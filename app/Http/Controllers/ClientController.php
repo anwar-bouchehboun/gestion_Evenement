@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,5 +25,9 @@ class ClientController extends Controller
         $user->ascked_permission = true;
         $user->update();
         return redirect(RouteServiceProvider::CLIENT);
+    }
+    public function show(Event $event){
+        $events = Event::findOrFail($event->id);
+                 return view('client.show',compact('events'));
     }
 }

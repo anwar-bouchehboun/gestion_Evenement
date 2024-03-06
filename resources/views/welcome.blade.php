@@ -15,19 +15,7 @@
 
 </head>
 
-{{-- @if (Route::has('login'))
-                <div class="z-10 p-6 text-right sm:fixed sm:top-0 sm:right-0">
-                    @auth
-                        <a href="{{ url('/client') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif --}}
 
 <body class="max-w-[1920px] mx-auto">
     <div class="bg-[#f8f9ff] font-[sans-serif] text-[#333] text-[15px]">
@@ -190,7 +178,7 @@
                                     <h4 class="mb-2 font-normal text-gray-400">{{ $event->location }} -<span
                                             class="text-blue-500 "> {{ $event->date }}</span>
                                         <h5 class="mb-2 font-semibold">{{ $event->user->name }}</h5>
-                                        <a href=""
+                                        <a href="{{ route('show.event',$event) }}"
                                             class="text-[#fff] font-medium text-sm hover:text-red-800 float-end mt-2 border border-cyan-400 py-1 px-3 bg-cyan-400">View</a>
 
                                 </div>

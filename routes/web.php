@@ -26,6 +26,7 @@ Route::post('/filtrer', [HomeController::class,'filtrer'])->name('filtrer');
 
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('client');
+    Route::get('/showEvent/{event}', [ClientController::class, 'show'])->name('show.event');
     Route::get('/permission/{user}',[ClientController::class, 'askpermession'])->name('Accepte');
 
 
