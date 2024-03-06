@@ -10,9 +10,9 @@
         <div class="p-6">
 
             <h2 class="  text-[#f84525] text-3xl font-bold pb-2">DASHBOARD</h2>
-            <div class="p-2 mb-6 text-center rounded bg-[#FEECE2] w-60">
+            <div class="p-2 mb-6 text-center rounded w-60">
                 <div class="font-bold text-blue-500 uppercase ">
-                    @if (Auth::user()->ascked_permission == false)
+                    {{-- @if (Auth::user()->ascked_permission == false)
                         <form action="{{ route('Accepte', ['user' => Auth::user()]) }}">
                             <button
                                 class="inline-flex items-center px-1 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out border border-transparent rounded-md  focus:outline-none text-[#F6995C]">
@@ -26,7 +26,7 @@
                         @else
                             waiting
                         @endcan
-                    @endif
+                    @endif --}}
                     {{-- <form action="{{ route('Accepte', Auth::user()) }}" method="POST" class="btn">
                         @csrf
                         @method('PUT')

@@ -34,10 +34,11 @@
         <header class='py-4 px-4 sm:px-10 z-50 min-h-[70px] '>
             <div class='relative flex flex-wrap items-center gap-4'>
                 <h2 class="text-2xl font-bold">Tuned <span class="bg-[#387ADF] text-white px-2 rounded-md">EVENTO</span>
-                </h2> </a>
+                </h2>
+                {{-- </a> --}}
                 <div class='flex ml-auto lg:order-1'>
-                    <button
-                        class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'>Login</button>
+                    {{-- <button
+                        class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'>Login</button> --}}
                     <button id="toggle" class='lg:hidden ml-7'>
                         <svg class="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -49,21 +50,31 @@
                 <ul id="collapseMenu"
                     class='lg:!flex lg:ml-12 lg:space-x-6 max-lg:space-y-6 max-lg:hidden max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[250px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto max-lg:z-50'>
                     <li class='px-3 max-lg:border-b max-lg:py-2'>
-                        <a href='javascript:void(0)'
+                        <a href='{{ route('Home') }}'
                             class='block font-bold text-blue-600 transition-all lg:hover:text-blue-600'>Home</a>
                     </li>
-                    <li class='px-3 max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-                            class='block font-bold transition-all lg:hover:text-blue-600'>Team</a>
-                    </li>
-                    <li class='px-3 max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-                            class='block font-bold transition-all lg:hover:text-blue-600'>Feature</a>
-                    </li>
-                    <li class='px-3 max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-                            class='block font-bold transition-all lg:hover:text-blue-600'>Blog</a>
-                    </li>
-                    <li class='px-3 max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-                            class='block font-bold transition-all lg:hover:text-blue-600'>About</a>
-                    </li>
+                    @if (Route::has('login'))
+                        @auth
+                            @role('client')
+                                <li class='px-3 max-lg:border-b max-lg:py-2'><a href='{{ route('client') }}'
+                                        class='block font-bold transition-all lg:hover:text-blue-600'>Dashbord</a>
+                                </li>
+                            @endrole
+                        @else
+                            <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
+                                in</a>
+
+                            @if (Route::has('register'))
+                                <li class='px-3 max-lg:border-b max-lg:py-2'>
+                                    <a href="{{ route('register') }}"
+                                        class='block font-bold transition-all lg:hover:text-blue-600'>Register</a>
+                                </li>
+                            @endif
+                        @endauth
+
+                    @endif
+
+
                 </ul>
             </div>
         </header>
@@ -126,8 +137,9 @@
                     </div>
 
                     <div class="">
-                        <form action="{{ route('filtrer') }}" method="post"  class="grid items-center grid-cols-2 gap-4 mb-3 md:grid-cols-4">
-                          @csrf
+                        <form action="{{ route('filtrer') }}" method="post"
+                            class="grid items-center grid-cols-2 gap-4 mb-3 md:grid-cols-4">
+                            @csrf
                             @foreach ($categories as $categorie)
                                 <button type="submit" name="categorie" value="{{ $categorie->id }}"
                                     class="px-6 py-2.5 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600 text-center">
@@ -199,7 +211,7 @@
         </div>
 
 
-        <div class="mt-32">
+        {{-- <div class="mt-32">
             <div class="mb-16 text-center">
                 <h2 class="text-3xl font-extrabold md:text-4xl">What our happy client say</h2>
             </div>
@@ -241,7 +253,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
 
