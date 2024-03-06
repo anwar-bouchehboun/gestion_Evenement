@@ -132,10 +132,12 @@
                         </svg>
                         <div>
                             <h3 class="mb-2 text-xl font-extrabold">Customization</h3>
-                            <h4 class="mb-2 font-normal">Location <span> date</span></h4>
+                            <h4 class="mb-2 font-normal">Location <span class=" text-emerald-500"> date</span></h4>
                             <p>Tailor our product to suit your needs Tailor our product to suit your needs.</p>
+                            <a href="" class="text-[#7e7ed8] font-medium text-sm hover:text-red-800 float-end mt-2">View</a>
+
                         </div>
-                    </div>
+                </div>
 
                 </div>
             </div>
