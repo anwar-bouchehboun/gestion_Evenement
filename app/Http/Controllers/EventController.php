@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
 use DateTime;
 use App\Models\Event;
+use App\Mail\TikerMail;
 use App\Models\Categorie;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -193,8 +195,13 @@ class EventController extends Controller
             $event->number_places--;
             $event->update();
         }
+        $subject = 'Ticket';
+        $body = 'Evento ';
+        $reservationData = Reservation::with('user', 'event')->where('event_id', $reservation->event_id)->first();
+        Mail::to($reservationData->user->email)->send(new TikerMail($subject, $body, $reservationData));
 
-        return redirect()->back(); 
+
+        return redirect()->back();
     }
 
 }

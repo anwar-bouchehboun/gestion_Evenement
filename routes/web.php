@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\TestemailticketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,7 @@ Route::middleware(['auth','role:organisateur'])->group(function(){
  Route::put('/accepte/{reservation}',[EventController::class, 'acceptereserve'])->name('accepte.reservation');
 });
 
-
+Route::get('email',[TestemailticketController::class,'index']);
 
 
 // Route::get('/dashboard', function () {
