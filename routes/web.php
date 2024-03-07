@@ -31,7 +31,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('client');
     Route::get('/permission/{user}',[ClientController::class, 'askpermession'])->name('Accepte');
     Route::post('/reserve',[ReservationController::class,'store'])->name('reserve');
-
+    Route::get('/showTicket/{reservation}',[ReservationController::class,'show'])->name('tickeShow');
 
 });
 

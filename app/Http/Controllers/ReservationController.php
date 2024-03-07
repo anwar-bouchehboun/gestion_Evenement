@@ -90,9 +90,15 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Reservation $reservation)
-    {
-        //
+    public function show(Reservation $reservation)  {
+    // $user=Auth::user();
+
+       $subject = 'Ticket';
+       $body = 'Evento ';
+       $reservationData=Reservation::with('user','event')->where('id',$reservation->id)->first();
+
+         return view('email',compact('subject', 'body','reservationData'));
+
     }
 
     /**

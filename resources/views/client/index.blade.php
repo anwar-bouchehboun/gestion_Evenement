@@ -194,10 +194,10 @@
                                             </td>
                                         @else
                                             <td>
-                                                <button
+                                                <a href="{{ route('tickeShow',$reservation) }}" target="_blank"
                                                     class="p-4 px-4 text-xs text-blue-700 align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">Accepte
 
-                                                </button>
+                                                </a>
 
                                             </td>
                                         @endif
