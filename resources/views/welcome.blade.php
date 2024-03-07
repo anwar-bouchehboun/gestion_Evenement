@@ -65,12 +65,12 @@
                             <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
                                 in</a>
 
-                            {{-- @if (Route::has('register'))
+                            @if (Route::has('register'))
                                 <li class='px-3 max-lg:border-b max-lg:py-2'>
                                     <a href="{{ route('register') }}"
                                         class='block font-bold transition-all lg:hover:text-blue-600'>Register</a>
                                 </li>
-                            @endif --}}
+                            @endif
                         @endauth
 
                     @endif
