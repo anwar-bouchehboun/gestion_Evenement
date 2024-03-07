@@ -65,12 +65,12 @@
                             <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
                                 in</a>
 
-                            @if (Route::has('register'))
+                            {{-- @if (Route::has('register'))
                                 <li class='px-3 max-lg:border-b max-lg:py-2'>
                                     <a href="{{ route('register') }}"
                                         class='block font-bold transition-all lg:hover:text-blue-600'>Register</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @endauth
 
                     @endif
@@ -190,6 +190,8 @@
                                     <h2 class="font-extrabold text-gray-900 title-font">{{ $event->title }}</h2>
                                     <h4 class="mb-2 font-normal text-gray-400">{{ $event->location }} -<span
                                             class="text-blue-500 "> {{ $event->date }}</span>
+                                            <h3 class="mb-1 text-xs tracking-widest text-gray-500 title-font">
+                                                {{ $event->status }}</h3>
                                         <h5 class="mb-2 font-semibold">{{ $event->user->name }}</h5>
                                         <a href="{{ route('show.event',$event) }}"
                                             class="text-[#fff] font-medium text-sm hover:text-red-800 float-end mt-2 border border-cyan-400 py-1 px-3 bg-cyan-400 rounded">View</a>
@@ -265,7 +267,7 @@
     </div>
 
     <footer class="px-4 py-12 mt-32 bg-cyan-900 sm:px-10">
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {{-- <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div>
                 <h4 class="mb-6 text-xl font-extrabold text-white">Quick Links</h4>
                 <ul class="space-y-4">
@@ -347,12 +349,12 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="pt-8 mt-8 text-center border-t border-gray-400">
+        </div> --}}
+        <div class="text-center ">
             <p class="text-gray-300">
-                Copyright © 2023
-                <a href="https://readymadeui.com/" target="_blank" class="mx-1 hover:underline">ReadymadeUI</a>
-                All Rights Reserved.
+                Copyright © {{ now()->year }} <span class="text-2xl font-bold">Tuned <span class="bg-[#FFF] text-[#387ADF] px-2 rounded-md">EVENTO</span></span>
+
+
             </p>
         </div>
     </footer>

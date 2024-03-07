@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -12,7 +14,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-      
+
     }
 
     /**
@@ -28,7 +30,44 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = $request->event_id;
+        $user = Auth::id();
+        $event = Event::findOrFail($id);
+
+
+        $client = Reservation::where('user_id', $user)->where('event_id', $event->id)->first();
+        if ($client) {
+            return redirect()->back()->with('error', "Déjà réservé");
+        } else {
+            //  dd($client);
+            if ($event->status == "auto") {
+
+                $reserve = Reservation::create([
+                    'event_id' => $id,
+                    'user_id' => $user,
+                    'accepted' => true
+                ]);
+
+                if ($reserve->accepted== true) {
+                    if ($event) {
+                        $event->number_places--;
+                        $event->update();
+                        return redirect()->back()->with('success', "Rservation on a Accepte");
+                    }
+                }
+            } else {
+                $reserve = Reservation::create([
+                    'event_id' => $id,
+                    'user_id' => $user,
+                    'accepted' => false
+                ]);
+                return redirect()->back()->with('success', "Rservation en place on a attend  ");
+
+            }
+        }
+
+
+
     }
 
     /**

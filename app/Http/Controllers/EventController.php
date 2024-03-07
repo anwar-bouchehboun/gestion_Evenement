@@ -187,7 +187,14 @@ class EventController extends Controller
     public function acceptereserve(Reservation $reservation){
         $reservation->accepted = 1;
         $reservation->update();
-        return redirect()->back();
 
+        if ($reservation) {
+            $event = Event::findOrFail($reservation->event_id);
+            $event->number_places--;
+            $event->update();
+        }
+
+        return redirect()->back(); 
     }
+
 }

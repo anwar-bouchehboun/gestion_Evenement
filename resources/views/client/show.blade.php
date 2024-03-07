@@ -52,14 +52,13 @@
                             <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
                                 in</a>
 
-                            @if (Route::has('register'))
+                            {{-- @if (Route::has('register'))
                                 <li class='px-3 max-lg:border-b max-lg:py-2'>
                                     <a href="{{ route('register') }}"
                                         class='block font-bold transition-all lg:hover:text-blue-600'>Register</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @endauth
-
                     @endif
 
 
@@ -76,14 +75,18 @@
             <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
                 <div class="grid items-center grid-cols-1 gap-y-8 lg:grid-cols-2 gap-x-16 xl:gap-x-24">
                     <div class="relative mb-12">
-                        <img class="w-full rounded-md"  src="../storage/{{ $events->image }}" alt="" />
+                        <img class="w-full rounded-md" src="../storage/{{ $events->image }}" alt="" />
 
-                        <div class="absolute w-full max-w-xs px-4 -translate-x-1/2 sm:px-0 sm:max-w-sm left-1/2 -bottom-12">
+                        <div
+                            class="absolute w-full max-w-xs px-4 -translate-x-1/2 sm:px-0 sm:max-w-sm left-1/2 -bottom-12">
                             <div class="overflow-hidden bg-white rounded">
                                 <div class="px-10 py-6">
                                     <div class="flex items-center">
-                                        <p class="flex-shrink-0 text-3xl font-bold text-blue-600 sm:text-4xl">{{ $events->number_places }}</p>
-                                        <p class="pl-6 text-sm font-bold text-gray-500 sm:text-lg">Nomber Place <br />Disponible</p>
+                                        <p class="flex-shrink-0 text-3xl font-bold text-blue-600 sm:text-4xl">
+                                            {{ $events->number_places }}</p>
+                                        <p class="pl-6 text-sm font-bold text-gray-500 sm:text-lg">Nomber Place
+                                            <br />Disponible
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -92,16 +95,41 @@
 
                     <div>
                         <div class="flex items-center justify-center w-16 h-16 bg-white rounded-full">
-                            <svg class="w-8 h-8 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            <svg class="w-8 h-8 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
-                        <h2 class="mt-10 text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl lg:leading-tight"> {{ $events->title }} </h2>
+                        <h2
+                            class="mt-10 text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl lg:leading-tight">
+                            {{ $events->title }} </h2>
                         <p class="mt-6 text-lg leading-relaxed text-gray-600">{{ $events->description }}</p>
-                        <h5 class=""> <strong  class="text-3xl text-blue-600">{{ $events->date }}</strong> </h5>
-                        <span class="text-2xl text-slate-600">  {{ $events->location }}</span> <br>
-                        <a href="#" title="" class="inline-flex items-center justify-center px-10 py-4 text-base font-semibold text-white transition-all duration-200 rounded-md mt-9 bg-gradient-to-r to-blue-600 hover:opacity-80 focus:opacity-80 from-cyan-600" role="button"> Réservé </a>
+                        <h5 class=""> <strong class="text-3xl text-blue-600">{{ $events->date }}</strong> </h5>
+                        <span class="text-2xl text-slate-600"> {{ $events->location }}</span> <br>
+                        <form action="{{ route('reserve') }}" method="post">
+                            @csrf
+                            <input type="text" name="event_id" value="{{ $events->id }}" hidden>
+                            <button type="submit"
+                                class="inline-flex items-center justify-center px-10 py-4 text-base font-semibold text-white transition-all duration-200 rounded-md mt-9 bg-gradient-to-r to-blue-600 hover:opacity-80 focus:opacity-80 from-cyan-600"
+                                role="button"> Réservé </button>
+
+                        </form>
                     </div>
+                    @if (session('success'))
+                        <div class="p-4 text-green-700 bg-green-100 border-l-4 border-green-500" role="alert">
+                            <p class="font-bold">Success</p>
+                            <p>{{ session('success') }}</p>
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="p-4 text-red-700 bg-red-100 border-l-4 border-red-500" role="alert">
+                            <p class="font-bold">Erreur</p>
+                            <p>{{ session('error') }}</p>
+                        </div>
+                    @endif
+
+
                 </div>
             </div>
         </section>
@@ -113,94 +141,12 @@
     </div>
 
     <footer class="px-4 py-12 bg-cyan-900 sm:px-10">
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <div>
-                <h4 class="mb-6 text-xl font-extrabold text-white">Quick Links</h4>
-                <ul class="space-y-4">
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Our
-                            Story</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"
-                            class="text-gray-300 transition-all hover:text-white">Newsroom</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Careers</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Blog</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="mb-6 text-xl font-extrabold text-white">Services</h4>
-                <ul class="space-y-4">
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Web
-                            Development</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Testing
-                            Automation</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">AWS
-                            Development
-                            Services</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Mobile
-                            App
-                            Development</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="mb-6 text-xl font-extrabold text-white">Platforms</h4>
-                <ul class="space-y-4">
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Hubspot</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Marketo
-                            Integration
-                            Services</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Marketing
-                            Glossary</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">UIPath</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="mb-6 text-xl font-extrabold text-white">Company</h4>
-                <ul class="space-y-4">
-                    <li>
-                        <a href="javascript:void(0)"
-                            class="text-gray-300 transition-all hover:text-white">Accessibility</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">About</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Contact</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="text-gray-300 transition-all hover:text-white">Learn
-                            more</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="pt-8 mt-8 text-center border-t border-gray-400">
+        <div class="text-center">
             <p class="text-gray-300">
-                Copyright © 2023
-                <a href="https://readymadeui.com/" target="_blank" class="mx-1 hover:underline">ReadymadeUI</a>
-                All Rights Reserved.
+
+                Copyright © {{ now()->year }} <span class="text-2xl font-bold">Tuned <span
+                        class="bg-[#FFF] text-[#387ADF] px-2 rounded-md">EVENTO</span></span>
+
             </p>
         </div>
     </footer>

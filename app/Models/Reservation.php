@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable =   [
+        'event_id',
+        'user_id',
+        'accepted'
+    ];
 
     public function event(){
         return $this->belongsTo(Event::class,'event_id');

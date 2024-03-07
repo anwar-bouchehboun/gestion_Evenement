@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
@@ -22,12 +23,13 @@ use App\Http\Controllers\CategorieController;
 Route::get('/', [HomeController::class,'index'])->name('Home');
 Route::post('/search', [HomeController::class,'search'])->name('search');
 Route::post('/filtrer', [HomeController::class,'filtrer'])->name('filtrer');
+Route::get('/showEvent/{event}', [ClientController::class, 'show'])->name('show.event');
 
 
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('client');
-    Route::get('/showEvent/{event}', [ClientController::class, 'show'])->name('show.event');
     Route::get('/permission/{user}',[ClientController::class, 'askpermession'])->name('Accepte');
+    Route::post('/reserve',[ReservationController::class,'store'])->name('reserve');
 
 
 });
