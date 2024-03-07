@@ -23,6 +23,7 @@ class HomeController extends Controller
             ->where('date', '>', $date)
             ->where('validated', true)
             ->paginate(6);
+            // dd($eventaffiche);
         return view('welcome', compact('events', 'organisateur', 'categories', 'eventaffiche'));
     }
 

@@ -188,6 +188,7 @@ class EventController extends Controller
     }
     public function acceptereserve(Reservation $reservation){
         $reservation->accepted = 1;
+    //    dd( $reservation->user_id);
         $reservation->update();
 
         if ($reservation) {
@@ -197,7 +198,9 @@ class EventController extends Controller
         }
         $subject = 'Ticket';
         $body = 'Evento ';
-        $reservationData = Reservation::with('user', 'event')->where('event_id', $reservation->event_id)->first();
+     $reservationData = Reservation::with('user', 'event')->where('user_id', $reservation->user_id)->where('event_id', $reservation->event_id)->first();
+
+        // $reservationData = Reservation::with('user', 'event')->where('event_id', $reservation->event_id)->first();
         Mail::to($reservationData->user->email)->send(new TikerMail($subject, $body, $reservationData));
 
 

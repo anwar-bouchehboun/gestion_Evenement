@@ -41,7 +41,7 @@ class TikerMail extends Mailable
     public function build()
     {
 
-        //  dd($this->reservationData);
+        //   dd($this->reservationData);
         return $this->subject($this->subject)
             ->view('email')
             ->with([

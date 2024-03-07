@@ -62,15 +62,15 @@ class ReservationController extends Controller
 
                 $subject = 'Ticket';
                 $body = 'Evento ';
-                $reservationData = Reservation::with('user', 'event')->where('event_id', $id)->first();
+                $reservationData = Reservation::with('user', 'event')->where('user_id', $user)->first();
                 $users = Auth::user();
-
+                // dd($reservationData);
                 //    return view('email',compact('user','subject', 'body','reservationData'));
                 Mail::to($users->email)->send(new TikerMail($subject, $body, $reservationData));
                 // Mail::to($users->email)->send(new TikerMail($subject, $body,$reservationData));
 
 
-                return redirect()->back()->with('success', "Rservation on a Accepte");
+             return redirect()->back()->with('success', "Rservation on a Accepte");
 
             } else {
                 $reserve = Reservation::create([
