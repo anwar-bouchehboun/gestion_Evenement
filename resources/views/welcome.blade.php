@@ -25,6 +25,20 @@
                 </h2>
                 {{-- </a> --}}
                 <div class='flex ml-auto lg:order-1'>
+                    @auth
+                        @role('client')
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-responsive-nav-link :href="route('logout')"
+                                    class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'
+                                    onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-responsive-nav-link>
+                            </form>
+                        @endrole
+                    @endauth
                     {{-- <button
                         class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'>Login</button> --}}
                     <button id="toggle" class='lg:hidden ml-7'>
@@ -47,19 +61,7 @@
                                 <li class='px-3 max-lg:border-b max-lg:py-2'><a href='{{ route('client') }}'
                                         class='block font-bold transition-all lg:hover:text-blue-600'>Dashbord</a>
                                 </li>
-                                <li class='px-3 max-lg:border-b max-lg:py-2'>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-
-                                        <x-responsive-nav-link :href="route('logout')"
-                                        class='block font-bold transition-all lg:hover:text-blue-600'
-                                                onclick="event.preventDefault();
-                                                            this.closest('form').submit();">
-                                            {{ __('Log Out') }}
-                                        </x-responsive-nav-link>
-                                    </form>
-                            </li>
-
+                          
                             @endrole
                         @else
                             <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
@@ -190,10 +192,10 @@
                                     <h2 class="font-extrabold text-gray-900 title-font">{{ $event->title }}</h2>
                                     <h4 class="mb-2 font-normal text-gray-400">{{ $event->location }} -<span
                                             class="text-blue-500 "> {{ $event->date }}</span>
-                                            <h3 class="mb-1 text-xs tracking-widest text-gray-500 title-font">
-                                                {{ $event->status }}</h3>
+                                        <h3 class="mb-1 text-xs tracking-widest text-gray-500 title-font">
+                                            {{ $event->status }}</h3>
                                         <h5 class="mb-2 font-semibold">{{ $event->user->name }}</h5>
-                                        <a href="{{ route('show.event',$event) }}"
+                                        <a href="{{ route('show.event', $event) }}"
                                             class="text-[#fff] font-medium text-sm hover:text-red-800 float-end mt-2 border border-cyan-400 py-1 px-3 bg-cyan-400 rounded">View</a>
 
                                 </div>
@@ -352,7 +354,8 @@
         </div> --}}
         <div class="text-center ">
             <p class="text-gray-300">
-                Copyright © {{ now()->year }} <span class="text-2xl font-bold">Tuned <span class="bg-[#FFF] text-[#387ADF] px-2 rounded-md">EVENTO</span></span>
+                Copyright © {{ now()->year }} <span class="text-2xl font-bold">Tuned <span
+                        class="bg-[#FFF] text-[#387ADF] px-2 rounded-md">EVENTO</span></span>
 
 
             </p>

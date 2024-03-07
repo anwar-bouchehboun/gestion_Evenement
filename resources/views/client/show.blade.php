@@ -25,6 +25,20 @@
                 </h2>
                 {{-- </a> --}}
                 <div class='flex ml-auto lg:order-1'>
+                    @auth
+                        @role('client')
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-responsive-nav-link :href="route('logout')"
+                                class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-responsive-nav-link>
+                            </form>
+                        @endrole
+                    @endauth
                     {{-- <button
                         class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'>Login</button> --}}
                     <button id="toggle" class='lg:hidden ml-7'>
@@ -47,6 +61,18 @@
                                 <li class='px-3 max-lg:border-b max-lg:py-2'><a href='{{ route('client') }}'
                                         class='block font-bold transition-all lg:hover:text-blue-600'>Dashbord</a>
                                 </li>
+                                {{-- <li class='px-3 max-lg:border-b max-lg:py-2'>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+
+                                        <x-responsive-nav-link :href="route('logout')"
+                                            class='block font-bold transition-all lg:hover:text-blue-600'
+                                            onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </x-responsive-nav-link>
+                                    </form>
+                                </li> --}}
                             @endrole
                         @else
                             <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
