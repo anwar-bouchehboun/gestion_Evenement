@@ -25,8 +25,8 @@
                 </h2>
                 {{-- </a> --}}
                 <div class='flex ml-auto lg:order-1'>
-                    @auth
-                        @role('client')
+                 @auth
+                        {{-- @role('client') --}}
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
@@ -37,7 +37,7 @@
                                     {{ __('Log Out') }}
                                 </x-responsive-nav-link>
                             </form>
-                        @endrole
+                        {{-- @endrole --}}
                     @endauth
                     {{-- <button
                         class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'>Login</button> --}}
@@ -63,6 +63,19 @@
                                 </li>
 
                             @endrole
+                            @role('admin')
+                            <li class='px-3 max-lg:border-b max-lg:py-2'><a href='{{ route('dashbord.admin') }}'
+                                    class='block font-bold transition-all lg:hover:text-blue-600'>Dashbord</a>
+                            </li>
+
+                        @endrole
+                        @role('organisateur')
+                        <li class='px-3 max-lg:border-b max-lg:py-2'><a href='{{ route('event.index') }}'
+                                class='block font-bold transition-all lg:hover:text-blue-600'>Dashbord</a>
+                        </li>
+
+                    @endrole
+
                         @else
                         <li class='px-3 max-lg:border-b max-lg:py-2'>
                             <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Login</a>

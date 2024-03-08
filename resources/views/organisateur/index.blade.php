@@ -21,7 +21,7 @@
                     @if (Auth::user()->ascked_permission == false)
                         <form action="{{ route('Accepte', ['user' => Auth::user()]) }}">
                             <button
-                                class="inline-flex items-center px-1 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out border border-transparent rounded-md  focus:outline-none text-[#F6995C]">
+                                class="inline-flex items-center px-1 py-2 text-sm font-medium leading-4  transition duration-150 ease-in-out border border-transparent rounded-md  focus:outline-none text-[#F6995C]">
                                 Rappel
                                 Permission
                             </button>
@@ -151,11 +151,11 @@
                                             </tr>
                                         @endforeach
                                     @else
-                                    <tr>
-                                        <td colspan="9" class="px-6 py-4 text-center text-gray-500">
-                                            No Event Created.
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="9" class="px-6 py-4 text-center text-gray-500">
+                                                No Event Created.
+                                            </td>
+                                        </tr>
                                     @endif
 
 
