@@ -42,7 +42,7 @@
             <x-input-label for="password_confirmation" :value="__('Role')" />
 
          <select name="role" id="" class="block w-full mt-1">
-            <option value="" selected disabled>Selected role</option>
+            <option value="" selected disabled>Choisir Option</option>
             @foreach ($roles as $role)
             <option value="{{ $role->id }}">{{ $role->name }}</option>
             @endforeach
@@ -52,7 +52,7 @@
         </div>
         {{-- roles --}}
         <div class="flex items-center justify-end mt-4">
-            <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            <a class="text-sm text-white underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 
