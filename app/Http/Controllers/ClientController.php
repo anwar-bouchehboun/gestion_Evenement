@@ -14,7 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $reservations = Reservation::with(['user', 'event'])
-        ->withTrashed() // inclure les éléments soft deleted
+        // ->withTrashed() // inclure les éléments soft deleted
         ->where('user_id', Auth::id())
         ->get();
         return view('client.index', compact('reservations'));
@@ -28,6 +28,11 @@ class ClientController extends Controller
     }
     public function show(Event $event){
         $events = Event::findOrFail($event->id);
-                 return view('client.show',compact('events'));
+        if($event->number_places>0){
+            return view('client.show',compact('events'));
+        }
+        else{
+            return redirect()->route('Home');
+        }
     }
 }

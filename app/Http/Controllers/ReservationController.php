@@ -38,55 +38,61 @@ class ReservationController extends Controller
         $event = Event::findOrFail($id);
 
 
-        $client = Reservation::where('user_id', $user)->where('event_id', $event->id)->first();
+        // $client = Reservation::where('user_id', $user)->where('event_id', $event->id)->first();
         // dd($client);
         // if ($client) {
 
         //     return redirect()->back()->with('error', "Déjà réservé");
         // } else {
+        if ($event->number_places >= $Quntite) {
+            if ($event->status == "auto") {
+                for ($i = 0; $i < $Quntite; $i++) {
+                    $reserve = Reservation::create([
+                        'event_id' => $id,
+                        'user_id' => $user,
+                        'accepted' => true
+                    ]);
 
-        if ($event->status == "auto") {
-            for ($i = 0; $i < $Quntite; $i++) {
-                $reserve = Reservation::create([
-                    'event_id' => $id,
-                    'user_id' => $user,
-                    'accepted' => true
-                ]);
 
-
-                if ($reserve->accepted == true) {
-                    if ($event) {
-                        $event->number_places--;
-                        $event->update();
+                    if ($reserve->accepted == true) {
+                        if ($event) {
+                            $event->number_places--;
+                            $event->update();
+                        }
                     }
+                    $reservationData[] = $reserve;
                 }
-                $reservationData[] = $reserve;
-            }
 
-        } else {
-            for ($i = 0; $i < $Quntite; $i++) {
+            } else {
+                for ($i = 0; $i < $Quntite; $i++) {
 
-                $reserve = Reservation::create([
-                    'event_id' => $id,
-                    'user_id' => $user,
-                    'accepted' => false
-                ]);
-                $reservationData[] = $reserve;
+                    $reserve = Reservation::create([
+                        'event_id' => $id,
+                        'user_id' => $user,
+                        'accepted' => false
+                    ]);
+                    $reservationData[] = $reserve;
+                }
+                return redirect()->back()->with('success', "Rservation en place on a attend  ");
+
             }
-            return redirect()->back()->with('success', "Rservation en place on a attend  ");
+            // dd($reservationData);
+            $subject = 'Ticket Reservation';
+            $body = 'Evento ';
+
+            //  $reservationData = Reservation::with('user', 'event')->where('user_id', $user)->where('event_id',$id)->first();
+            $users = Auth::user();
+            Mail::to($users->email)->send(new TikerMail($subject, $body, $reservationData));
+
+            return redirect()->back()->with('success', "Rservation on a Accepte");
 
         }
+        return redirect()->back()->with('error', "Rservation on a Refuser");
 
 
-        // dd($reservationData);
-        $subject = 'Ticket Reservation';
-        $body = 'Evento ';
 
-        //  $reservationData = Reservation::with('user', 'event')->where('user_id', $user)->where('event_id',$id)->first();
-        $users = Auth::user();
-        Mail::to($users->email)->send(new TikerMail($subject, $body, $reservationData));
 
-        return redirect()->back()->with('success', "Rservation on a Accepte");
+
 
         // }
 
@@ -105,7 +111,7 @@ class ReservationController extends Controller
         $body = 'Evento ';
         $reservationData = Reservation::with('user', 'event')->where('id', $reservation->id)->first();
 
-          return view('ticket',compact('subject', 'body','reservationData'));
+        return view('ticket', compact('subject', 'body', 'reservationData'));
 
     }
 

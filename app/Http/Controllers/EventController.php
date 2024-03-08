@@ -105,7 +105,7 @@ class EventController extends Controller
                 $query->where('status', 'auto');
             })
             ->count();
-            $countReservationsmanul = Reservation::where('event_id', $event->id)
+      $countReservationsmanul = Reservation::where('event_id', $event->id)
             ->whereHas('event', function ($query) {
                 $query->where('status', 'manuel');
             })
@@ -189,7 +189,6 @@ class EventController extends Controller
     public function acceptereserve(Reservation $reservation){
 
         $reservation->accepted = 1;
-    //    dd( $reservation->user_id);
         $reservation->update();
 
         if ($reservation) {
