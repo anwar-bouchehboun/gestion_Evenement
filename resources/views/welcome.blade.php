@@ -50,7 +50,7 @@
                     </button>
                 </div>
                 <ul id="collapseMenu"
-                    class='lg:!flex lg:ml-12 lg:space-x-6 max-lg:space-y-6 max-lg:hidden max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[250px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto max-lg:z-50'>
+                    class='lg:!flex lg:ml-12 lg:space-x-6 max-lg:space-y-6 max-lg:hidden max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[100%] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:mt-14 max-lg:shadow-md max-lg:overflow-auto max-lg:z-50'>
                     <li class='px-3 max-lg:border-b max-lg:py-2'>
                         <a href='{{ route('Home') }}'
                             class='block font-bold text-blue-600 transition-all lg:hover:text-blue-600'>Home</a>
@@ -61,11 +61,12 @@
                                 <li class='px-3 max-lg:border-b max-lg:py-2'><a href='{{ route('client') }}'
                                         class='block font-bold transition-all lg:hover:text-blue-600'>Dashbord</a>
                                 </li>
-                          
+
                             @endrole
                         @else
-                            <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
-                                in</a>
+                        <li class='px-3 max-lg:border-b max-lg:py-2'>
+                            <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Login</a>
+                        </li>
 
                             @if (Route::has('register'))
                                 <li class='px-3 max-lg:border-b max-lg:py-2'>

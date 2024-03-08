@@ -21,7 +21,7 @@
 
 
     <main class="flex flex-col w-screen h-screen">
-        @foreach ($reservationData as $reserve)
+        {{-- @foreach ($reservationData as $reserve) --}}
         <section class="flex items-center justify-center flex-grow w-full p-4 bg-red-800">
             <div class="flex w-full h-64 max-w-3xl text-zinc-50"
                 style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL-Lm45K5q1h-05z6F3JOhI0iEIa9lyj-A2g&usqp=CAU'); background-repeat: no-repeat; background-size: cover; background-position: center; width:100%;">
@@ -33,7 +33,7 @@
                 <div
                     class="relative flex flex-col items-center justify-between h-full border-2 border-black border-dashed bg-zinc-900">
                     <div class="text-sm font-medium text-center text-black mt-28" style="rotate: 90deg;">Ticket
-                        Number : {{ $reserve->id }}</div>
+                        Number : {{ $reservationData->id }}</div>
 
                     {{-- <div class="absolute w-8 h-8 bg-black rounded-full -top-5"></div>
                     <div class="absolute w-8 h-8 bg-black rounded-full -bottom-5"></div> --}}
@@ -42,8 +42,8 @@
                     <div class="flex items-center justify-between w-full">
                         <div class="flex flex-col ">
                             <span class="text-2xl font-bold">{!! $body !!}</span>
-                            <span class="text-sm font-bold text-black">{!! $reserve->user->name !!}</span>
-                            <span class="text-sm font-bold text-black">{!! $reserve->user->email !!}</span>
+                            <span class="text-sm font-bold text-black">{!! $reservationData->user->name !!}</span>
+                            <span class="text-sm font-bold text-black">{!! $reservationData->user->email !!}</span>
                         </div>
                         <div class="flex flex-col items-center flex-grow px-10">
                             <span class="text-xs font-extrabold text-black">YOUCODE</span>
@@ -83,12 +83,12 @@
 
 
                             <span class="text-2xl font-bold">
-                                {{ $reserve->event->title }}
+                                {{ $reservationData->event->title }}
                             </span>
 
                             <span class="text-sm font-bold text-black uppercase">
                                 Organisateur :
-                                {{ $reserve->event->user->name }}
+                                {{ $reservationData->event->user->name }}
                                 {{-- {{ $reservation['salleName'] }} --}}
                             </span>
                         </div>
@@ -97,13 +97,13 @@
                         <div class="flex flex-col">
                             <span class="text-xs font-bold">Date</span>
                             <span class="font-bold text-black ">
-                                {{ $reserve->event->date }}
+                                {{ $reservationData->event->date }}
                             </span>
                         </div>
                         <div class="flex flex-col">
                             <span class="text-xs font-bold">Lieu</span>
                             <span class="font-bold text-black ">
-                                {{ $reserve->event->location }}
+                                {{ $reservationData->event->location }}
                             </span>
                         </div>
                         <div class="flex flex-col">
@@ -112,7 +112,7 @@
                         <div class="flex flex-col">
                             <span class="text-xs font-bold">Categorie</span>
                             <span class="font-bold text-black ">
-                                {{ $reserve->event->categorie->name }}
+                                {{ $reservationData->event->categorie->name }}
                             </span>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                 </div>
             </div>
         </section>
-        @endforeach
+        {{-- @endforeach --}}
     </main>
 
 </body>

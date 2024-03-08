@@ -21,9 +21,10 @@
     <div class="bg-[#f8f9ff] font-[sans-serif] text-[#333] text-[15px]">
         <header class='py-4 px-4 sm:px-10 z-50 min-h-[70px] '>
             <div class='relative flex flex-wrap items-center gap-4'>
+                <a href="{{ route('Home') }}">
                 <h2 class="text-2xl font-bold">Tuned <span class="bg-[#387ADF] text-white px-2 rounded-md">EVENTO</span>
                 </h2>
-                {{-- </a> --}}
+                </a>
                 <div class='flex ml-auto lg:order-1'>
                     @auth
                         @role('client')
@@ -31,7 +32,7 @@
                                 @csrf
 
                                 <x-responsive-nav-link :href="route('logout')"
-                                class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'
+                                    class='px-6 py-3 text-white transition-all rounded-xl bg-cyan-900 hover:bg-cyan-800'
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}
@@ -50,7 +51,8 @@
                     </button>
                 </div>
                 <ul id="collapseMenu"
-                    class='lg:!flex lg:ml-12 lg:space-x-6 max-lg:space-y-6 max-lg:hidden max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[250px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto max-lg:z-50'>
+                    class='lg:!flex lg:ml-12 lg:space-x-6 max-lg:space-y-6 max-lg:hidden max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[100%] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:mt-14 max-lg:shadow-md max-lg:overflow-auto max-lg:z-50'>
+                    <li class='px-3 max-lg:border-b max-lg:py-2'>
                     <li class='px-3 max-lg:border-b max-lg:py-2'>
                         <a href='{{ route('Home') }}'
                             class='block font-bold text-blue-600 transition-all lg:hover:text-blue-600'>Home</a>
@@ -75,15 +77,18 @@
                                 </li> --}}
                             @endrole
                         @else
-                            <a href="{{ route('login') }}" class='block font-bold transition-all lg:hover:text-blue-600'>Log
-                                in</a>
+                            <li class='px-3 max-lg:border-b max-lg:py-2'>
+                                <a href="{{ route('login') }}"
+                                    class='block font-bold transition-all lg:hover:text-blue-600'>Log
+                                    in</a>
+                            </li>
 
-                            {{-- @if (Route::has('register'))
+                            @if (Route::has('register'))
                                 <li class='px-3 max-lg:border-b max-lg:py-2'>
                                     <a href="{{ route('register') }}"
                                         class='block font-bold transition-all lg:hover:text-blue-600'>Register</a>
                                 </li>
-                            @endif --}}
+                            @endif
                         @endauth
                     @endif
 
@@ -128,14 +133,32 @@
                             </svg>
                         </div>
                         <h2
-                            class="mt-10 text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl lg:leading-tight">
+                            class="mt-10 text-2xl font-bold leading-tight text-black sm:text-4xl lg:text-3xl lg:leading-tight">
                             {{ $events->title }} </h2>
                         <p class="mt-6 text-lg leading-relaxed text-gray-600">{{ $events->description }}</p>
                         <h5 class=""> <strong class="text-3xl text-blue-600">{{ $events->date }}</strong> </h5>
                         <span class="text-2xl text-slate-600"> {{ $events->location }}</span> <br>
+
+
+
+
+
                         <form action="{{ route('reserve') }}" method="post">
                             @csrf
                             <input type="text" name="event_id" value="{{ $events->id }}" hidden>
+                            <div class="relative flex items-center max-w-[8rem] mt-2">
+                                <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="p-3 bg-gray-100 border border-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 rounded-s-lg h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                    </svg>
+                                </button>
+                                <input type="text" name="Quntite" id="quantity-input" data-input-counter aria-describedby="helper-text-explanation" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="999" required />
+                                <button type="button" id="increment-button" data-input-counter-increment="quantity-input" class="p-3 bg-gray-100 border border-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 rounded-e-lg h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                    </svg>
+                                </button>
+                            </div>
                             <button type="submit"
                                 class="inline-flex items-center justify-center px-10 py-4 text-base font-semibold text-white transition-all duration-200 rounded-md mt-9 bg-gradient-to-r to-blue-600 hover:opacity-80 focus:opacity-80 from-cyan-600"
                                 role="button"> Réservé </button>

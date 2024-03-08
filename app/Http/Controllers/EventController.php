@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use App\Models\Event;
-use App\Mail\TikerMail;
+use App\Mail\TiketMail;
 use App\Models\Categorie;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -187,6 +187,7 @@ class EventController extends Controller
 
     }
     public function acceptereserve(Reservation $reservation){
+
         $reservation->accepted = 1;
     //    dd( $reservation->user_id);
         $reservation->update();
@@ -201,7 +202,7 @@ class EventController extends Controller
      $reservationData = Reservation::with('user', 'event')->where('user_id', $reservation->user_id)->where('event_id', $reservation->event_id)->first();
 
         // $reservationData = Reservation::with('user', 'event')->where('event_id', $reservation->event_id)->first();
-        Mail::to($reservationData->user->email)->send(new TikerMail($subject, $body, $reservationData));
+    Mail::to($reservationData->user->email)->send(new TiketMail($subject, $body, $reservationData));
 
 
         return redirect()->back();
