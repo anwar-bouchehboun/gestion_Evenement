@@ -41,7 +41,7 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Role')" />
 
-         <select name="role" id="" class="block w-full mt-1">
+         <select name="role" id="" class="block w-full mt-1 rounded">
             <option value="" selected disabled>Choisir Option</option>
             @foreach ($roles as $role)
             <option value="{{ $role->id }}">{{ $role->name }}</option>
