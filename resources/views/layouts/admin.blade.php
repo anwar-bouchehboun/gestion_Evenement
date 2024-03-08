@@ -1334,7 +1334,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 <body class="text-gray-800 font-inter">
     <!--sidenav -->
     <div class="fixed left-0 top-0 w-64 h-full bg-[#f8f4f3] p-4 z-50 sidebar-menu transition-transform">
-        <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
+        <a href="{{ route('Home') }}" class="flex items-center pb-4 border-b border-b-gray-800">
 
             <h2 class="text-2xl font-bold">Tuned <span class="bg-[#387ADF] text-white px-2 rounded-md">EVENTO</span>
             </h2>
