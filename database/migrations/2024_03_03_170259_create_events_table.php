@@ -17,8 +17,7 @@ return new class extends Migration {
             $table->date('date');
             $table->string('location');
             $table->string('image');
-            $table->integer('number_places');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('number_places')->unsigned()->nullable(false)->default(0);            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('categories_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('status', ['manuel', 'auto']);
             $table->boolean('validated')->default(false);

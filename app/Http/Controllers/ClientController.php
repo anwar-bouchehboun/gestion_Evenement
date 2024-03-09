@@ -32,7 +32,7 @@ class ClientController extends Controller
             return view('client.show',compact('events'));
         }
         else{
-            return redirect()->route('Home');
+          abort(404);
         }
     }
 }
