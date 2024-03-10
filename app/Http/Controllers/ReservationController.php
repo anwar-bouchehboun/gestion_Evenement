@@ -29,7 +29,10 @@ class ReservationController extends Controller
 
     public function store(Request $request)
     {
-        $Quntite = $request->Quntite;
+        // $request->validate([
+        //     'quntite' => 'required|integer|min:0',
+        // ]);
+        $Quntite = $request->quntite;
         $id = $request->event_id;
         $user = Auth::id();
         $event = Event::findOrFail($id);
@@ -41,13 +44,14 @@ class ReservationController extends Controller
 
         //     return redirect()->back()->with('error', "Déjà réservé");
         // } else {
-        if ($event->number_places >= $Quntite) {
+        if ($event->number_places >= $Quntite && $Quntite>0 ) {
             if ($event->status == "auto") {
                 for ($i = 0; $i < $Quntite; $i++) {
                     $reserve = Reservation::create([
                         'event_id' => $id,
                         'user_id' => $user,
-                        'accepted' => true
+                        'accepted' => true,
+                        // 'quntite'=>$Quntite
                     ]);
 
 

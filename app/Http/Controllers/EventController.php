@@ -43,7 +43,7 @@ class EventController extends Controller
             'date' => 'required|date',
             'location' => 'required|string|max:255',
             'image' => 'required',
-            'number_places' => 'required|integer',
+            'number_places' => 'required|integer|min:0',
             'categories_id' => 'required|exists:categories,id',
             'status' => 'required|in:manuel,auto',
         ]);
@@ -106,6 +106,7 @@ class EventController extends Controller
             })
             ->count();
       $countReservationsmanul = Reservation::where('event_id', $event->id)
+            ->where('accepted', true)
             ->whereHas('event', function ($query) {
                 $query->where('status', 'manuel');
             })
