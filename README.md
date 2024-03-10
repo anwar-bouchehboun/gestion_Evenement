@@ -42,5 +42,6 @@ _ En tant qu'administrateur, je veux avoir accès à des statistiques.
 
 ​<img width="288" alt="image" src="https://github.com/anwar-bouchehboun/gestion_Evenement/assets/76851076/7abf1336-6901-4829-912b-89a13100c701">
 <img width="530" alt="image" src="https://github.com/anwar-bouchehboun/gestion_Evenement/assets/76851076/f351571f-8ddc-4668-91b9-91f2fe26d9cc">
+<img width="557" alt="image" src="https://github.com/anwar-bouchehboun/gestion_Evenement/assets/76851076/22f73f9b-9f99-41ac-8113-bee90721475a">
 
 lien planification :https://anouarbhbn.atlassian.net/jira/software/projects/DIS/boards/2
