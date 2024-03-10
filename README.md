@@ -1,19 +1,9 @@
 Contexte du projet
 La société "Evento" ambitionne de développer une plateforme novatrice dédiée à la gestion et à la réservation des places d'événements. L'objectif est de fournir une expérience utilisateur optimale aux participants, organisateurs et administrateurs. Cette plateforme permettra aux utilisateurs de découvrir, réserver et générer des tickets pour une variété d'événements, tandis que les organisateurs auront la possibilité de créer et de gérer leurs propres événements.
 
-​
-
-​
 
 Fonctionnalités Requises :
-
-​
-
-​
-
 Utilisateur :
-
-​
 
 _ En tant qu'utilisateur, je veux pouvoir m'inscrire sur la plateforme en fournissant mon nom, mon adresse e-mail et un mot de passe.
 
@@ -33,27 +23,14 @@ _ En tant qu'utilisateur, je veux pouvoir réserver une place pour un événemen
 
 _ En tant qu'utilisateur, je veux pouvoir générer un ticket une fois ma réservation confirmée.
 
-​
-
-​
-
 Organisateur :
-
-​
-
 _ En tant qu'organisateur, je veux pouvoir créer un nouvel événement en spécifiant son titre, sa description, sa date, son lieu, sa catégorie et le nombre de places disponibles.
 
 _ En tant qu'organisateur, je veux avoir accès à des statistiques sur les réservations de mes événements.
 
 _ En tant qu'organisateur, je veux avoir la possibilité de choisir entre une acceptation automatique des réservations ou une validation manuelle.
 
-​
-
-​
-
 Administrateur :
-
-​
 
 _ En tant qu'administrateur, je veux pouvoir gérer les utilisateurs en restricton leur access.
 
@@ -63,4 +40,7 @@ _ En tant qu'administrateur, je veux pouvoir valider les événements créés pa
 
 _ En tant qu'administrateur, je veux avoir accès à des statistiques.
 
-​
+​<img width="288" alt="image" src="https://github.com/anwar-bouchehboun/gestion_Evenement/assets/76851076/7abf1336-6901-4829-912b-89a13100c701">
+<img width="530" alt="image" src="https://github.com/anwar-bouchehboun/gestion_Evenement/assets/76851076/f351571f-8ddc-4668-91b9-91f2fe26d9cc">
+
+lien planification :https://anouarbhbn.atlassian.net/jira/software/projects/DIS/boards/2
