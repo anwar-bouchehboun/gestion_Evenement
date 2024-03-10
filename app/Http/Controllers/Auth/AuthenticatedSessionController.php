@@ -39,6 +39,7 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerateToken();
             abort(401);
 
+
         }
 
         return redirect()->back();

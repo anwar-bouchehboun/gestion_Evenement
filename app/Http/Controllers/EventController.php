@@ -187,7 +187,7 @@ class EventController extends Controller
 
     }
     public function acceptereserve(Reservation $reservation){
-
+//Manuel
         $reservation->accepted = 1;
         $reservation->update();
 

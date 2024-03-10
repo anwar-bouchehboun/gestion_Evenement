@@ -27,9 +27,6 @@ class ReservationController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $Quntite = $request->Quntite;
@@ -100,18 +97,16 @@ class ReservationController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
+ //affiche ticket pour page Dashbord client
     public function show(Reservation $reservation)
-    {
+    { //
         // $user=Auth::user();
 
         $subject = 'Ticket';
         $body = 'Evento ';
-        $reservationData = Reservation::with('user', 'event')->where('id', $reservation->id)->first();
+        $reservationData = Reservation::with('user', 'event')->where('id', $reservation->id)->get();
 
-        return view('ticket', compact('subject', 'body', 'reservationData'));
+        return view('email', compact('subject', 'body', 'reservationData'));
 
     }
 
